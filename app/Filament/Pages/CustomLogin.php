@@ -6,6 +6,7 @@ use Filament\Forms\Form;
 use Filament\Pages\Auth\Login as BaseLogin;
 class CustomLogin extends BaseLogin
 {
+    
      public function form(Form $form): Form
     {
         return $form
@@ -31,6 +32,10 @@ class CustomLogin extends BaseLogin
             'phone' => $data['phone'],
             'password' => $data['password'],
         ];
+    }
+    public function getHeading(): string
+    {
+        return "الدخول إلى وجهة"; 
     }
 
 }
