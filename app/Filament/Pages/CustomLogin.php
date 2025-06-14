@@ -13,7 +13,6 @@ class CustomLogin extends BaseLogin
             ->schema([
                 $this->getLoginFormComponent(),
                 $this->getPasswordFormComponent(),
-                $this->getRememberFormComponent(),
             ]);
     }
     protected function getLoginFormComponent(): \Filament\Forms\Components\Component
