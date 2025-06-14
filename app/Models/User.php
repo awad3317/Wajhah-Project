@@ -17,7 +17,10 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->user_type === 'admin';
+       if ($this->user_type !== 'admin') {
+            abort(403, 'غير مصرح لك بالدخول إلى لوحة التحكم');
+        }
+        return true;
     }
 
     /**
