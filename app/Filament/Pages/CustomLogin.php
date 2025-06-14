@@ -5,6 +5,7 @@ namespace App\Filament\Pages;
 use Filament\Forms\Form;
 use Filament\Pages\Auth\Login as BaseLogin;
 use Illuminate\Validation\ValidationException;
+use Filament\Notifications\Notification;
 class CustomLogin extends BaseLogin
 {
     
@@ -33,16 +34,25 @@ class CustomLogin extends BaseLogin
             'password' => $data['password'],
         ];
     }
-
-    protected function throwFailureValidationException(): never
-    {
-        throw ValidationException::withMessages([
-            'data.phone' => __('auth.failed'),
-        ]);
-    }
     public function getHeading(): string
     {
         return "الدخول إلى وجهة"; 
+    }
+
+    public function authenticate(): null|\Filament\Http\Responses\Auth\Contracts\LoginResponse
+    {
+        try {
+            return parent::authenticate();
+        } catch (ValidationException $e) {
+            Notification::make()
+                ->title('خطأ في تسجيل الدخول')
+                ->body('رقم الجوال أو كلمة المرور غير صحيحة')
+                ->danger()
+                ->persistent()
+                ->send();
+        
+            throw $e;
+        }
     }
 
 }
