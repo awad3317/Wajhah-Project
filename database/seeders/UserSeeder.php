@@ -19,5 +19,12 @@ class UserSeeder extends Seeder
             'password' => '12121212',
             'user_type' => 'admin',
         ]);
+
+        User::create([
+            'name' => 'User',
+            'phone' => '967730236552',
+            'password' => '12121212',
+            'user_type' => 'user',
+        ]);
     }
 }
