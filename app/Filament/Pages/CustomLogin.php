@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Forms\Form;
 use Filament\Pages\Auth\Login as BaseLogin;
+use Illuminate\Validation\ValidationException;
 class CustomLogin extends BaseLogin
 {
     
@@ -31,6 +32,13 @@ class CustomLogin extends BaseLogin
             'phone' => $data['phone'],
             'password' => $data['password'],
         ];
+    }
+
+    protected function throwFailureValidationException(): never
+    {
+        throw ValidationException::withMessages([
+            'data.phone' => __('auth.failed'),
+        ]);
     }
     public function getHeading(): string
     {
