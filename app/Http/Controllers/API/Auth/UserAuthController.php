@@ -35,7 +35,7 @@ class UserAuthController extends Controller
         // SendOtpEmailJob::dispatch($user->email, $otp);
         // Mail::to($user->email)->send(new OtpMail($otp));
 
-        return ApiResponseClass::sendResponse($user,'تم إرسال رمز التحقق الى رقم الهاتف :'. $user->phone);
+        return ApiResponseClass::sendResponse($user,'تم إرسال رمز التحقق الى رقم الهاتف :'. $user->phone.  ' : '. $otp);
     }
    
 }
