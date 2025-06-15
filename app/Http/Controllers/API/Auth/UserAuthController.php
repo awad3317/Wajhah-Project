@@ -9,13 +9,14 @@ use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
+use App\Services\HypersenderService;
 
 class UserAuthController extends Controller
 {
     /**
      * Create a new class instance.
      */
-    public function __construct(private UserRepository $UserRepository,private OtpService $otpService)
+    public function __construct(private UserRepository $UserRepository,private OtpService $otpService,private HypersenderService $HypersenderService)
     {
         //
     }
@@ -31,12 +32,9 @@ class UserAuthController extends Controller
 
         // Generate a random OTP and prepare it for sending
         $otp=$this->otpService->generateOTP($user->phone,'account_creation');
+        $this->HypersenderService->sendTextMessage($user->phone,strval($otp));
 
-        // Send an email with the OTP code to the user's email address
-        // SendOtpEmailJob::dispatch($user->email, $otp);
-        // Mail::to($user->email)->send(new OtpMail($otp));
-
-        return ApiResponseClass::sendResponse($user,'تم إرسال رمز التحقق الى رقم الهاتف :'. $user->phone.  ' : '. $otp);
+        return ApiResponseClass::sendResponse($user,'تم إرسال رمز التحقق الى رقم الهاتف :'. $user->phone);
     }
 
     public function login(Request $request)
@@ -53,10 +51,10 @@ class UserAuthController extends Controller
                 // Generate a random OTP and prepare it for sending
                 $otp=$this->otpService->generateOTP($user->phone,'account_creation');
 
-                // Send an email with the OTP code to the user's email address
+                $this->HypersenderService->sendTextMessage($user->phone,strval($otp));
             
 
-                return ApiResponseClass::sendError(" {{$otp}}حسابك غير مفعّل بعد، تم إرسال رمز تحقق جديد إليك.", null,403);
+                return ApiResponseClass::sendError("حسابك غير مفعّل بعد، تم إرسال رمز تحقق جديد إليك.", null,403);
             }
             // if($user->is_banned){
             //     return ApiResponseClass::sendError('الحساب محظور',null,401);

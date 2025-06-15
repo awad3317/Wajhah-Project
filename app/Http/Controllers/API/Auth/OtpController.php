@@ -9,10 +9,11 @@ use Illuminate\Validation\Rule;
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use App\Services\HypersenderService;
 
 class OtpController extends Controller
 {
-    public function __construct(private OtpService $otpService,private UserRepository $UserRepository)
+    public function __construct(private OtpService $otpService,private UserRepository $UserRepository,private HypersenderService $HypersenderService)
     {
         //
     }
@@ -23,8 +24,7 @@ class OtpController extends Controller
         ]);
         try {
             $otp=$this->otpService->generateOTP($fields['phone'],'account_creation');
-            // SendOtpEmailJob::dispatch($fields['email'], $otp);
-            // Mail::to($fields['email'])->send(new OtpMail($otp));
+            $this->HypersenderService->sendTextMessage($fields['phone'],strval($otp));
             return ApiResponseClass::sendResponse(null,'تم إرسال رمز التحقق الى : ' . $fields['phone']);
         } catch (Exception $e) {
             return ApiResponseClass::sendError(null,'Failed to resend OTP. ' . $e->getMessage());
