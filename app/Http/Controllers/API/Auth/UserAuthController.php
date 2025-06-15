@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Hash;
 
 class UserAuthController extends Controller
 {
@@ -37,5 +38,38 @@ class UserAuthController extends Controller
 
         return ApiResponseClass::sendResponse($user,'تم إرسال رمز التحقق الى رقم الهاتف :'. $user->phone.  ' : '. $otp);
     }
+
+    public function login(Request $request)
+    {
+        $fields=$request->validate([
+            'phone'=>['required','string'],
+            'password' => ['required','string'],
+        ]);
+        $user=$this->UserRepository->findByPhone($fields['phone']);
+        // Check if the user exists and if the password is correct
+        if($user && Hash::check($fields['password'], $user->password)){
+
+            if (is_null($user->phone_verified_at)) {
+                // Generate a random OTP and prepare it for sending
+                $otp=$this->otpService->generateOTP($user->phone,'account_creation');
+
+                // Send an email with the OTP code to the user's email address
+            
+
+                return ApiResponseClass::sendError(" {{$otp}}حسابك غير مفعّل بعد، تم إرسال رمز تحقق جديد إليك.", null,403);
+            }
+            // if($user->is_banned){
+            //     return ApiResponseClass::sendError('الحساب محظور',null,401);
+            // }
+
+            // Create a new token for the user
+            $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
+            $user->token=$token;
+            return ApiResponseClass::sendResponse(['user' => $user], 'User logged in successfully');
+        }
+         return ApiResponseClass::sendError('Unauthorized', ['error' => 'Invalid credentials'], 401);
+        
+    }
+
    
 }

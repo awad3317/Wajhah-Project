@@ -40,7 +40,7 @@ class UserRepository implements RepositoriesInterface
         return User::where('id', $id)->delete() > 0;
     }
 
-    public function findByPhone($phone): User
+    public function findByPhone($phone)
     {
         return User::where('phone', $phone)->first();
     }
