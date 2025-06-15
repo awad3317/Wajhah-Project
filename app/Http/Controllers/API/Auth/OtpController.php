@@ -25,7 +25,7 @@ class OtpController extends Controller
         try {
             $otp=$this->otpService->generateOTP($fields['phone'],'account_creation');
             $this->HypersenderService->sendTextMessage($fields['phone'],strval($otp));
-            return ApiResponseClass::sendResponse(null,'تم إرسال رمز التحقق الى : ' . $fields['phone']);
+            return ApiResponseClass::sendResponse(null,'Verification code has been sent to: ' . $fields['phone']);
         } catch (Exception $e) {
             return ApiResponseClass::sendError(null,'Failed to resend OTP. ' . $e->getMessage());
         }
@@ -34,21 +34,34 @@ class OtpController extends Controller
 
     public function verifyOtpAndLogin(Request $request) {
         $fields=$request->validate([
-            'phone'=>['required'],
+            'phone'=>['required',Rule::exists('users', 'phone')],
             'otp' => ['required','numeric'],
         ]);
-        // Verify the provided OTP using the OTP service
-        if($this->otpService->verifyOTP($fields['phone'],$fields['otp'])){
+        try {
+            // Verify the provided OTP using the OTP service
+            if(!$this->otpService->verifyOTP($fields['phone'],$fields['otp'])){
+                return ApiResponseClass::sendError(
+                    'Invalid or expired verification code',
+                    [],
+                    401 
+                );
+            }
             $user=$this->UserRepository->findByPhone($fields['phone']);
 
             // Update the user record to mark phone as verified
             $this->UserRepository->update(['phone_verified_at'=>now()],$user->id);
-            // Auth::login($user);
             
             // Create a new authentication token for the user
             $token = $user->createToken($user->username . '-AuthToken')->plainTextToken;
-            return ApiResponseClass::sendResponse(['user'=>$user,'token'=>$token], 'تم التحقق بنجاح');
+            $user->token=$token;
+            return ApiResponseClass::sendResponse([
+                'user' => $user,
+                'token' => $token,
+                'token_type' => 'Bearer'
+            ],'OTP verified successfully. You are now logged in.');
+        } catch (Exception $e) {
+         return ApiResponseClass::sendError(null,'Authentication failed. Please try again. ' . $e->getMessage());
         }
-        return ApiResponseClass::sendError('رمز التحقق غير صالح او منتهي الصلاحيه',[],400);
+        
     }
 }
