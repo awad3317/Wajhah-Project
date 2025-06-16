@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        
+        $middleware->validateCsrfTokens(except: [
+            '/github/deploy' // <-- exclude this route
+        ]);
         $middleware->alias([
             'check.banned' => CheckBannedUser::class,
         ]);
