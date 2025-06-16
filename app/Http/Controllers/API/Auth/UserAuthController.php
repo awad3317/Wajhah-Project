@@ -54,11 +54,11 @@ class UserAuthController extends Controller
                 $this->HypersenderService->sendTextMessage($user->phone,strval($otp));
             
 
-                return ApiResponseClass::sendError("حسابك غير مفعّل بعد، تم إرسال رمز تحقق جديد إليك.", null,403);
+                return ApiResponseClass::sendError("Your account is not yet activated. A new verification code has been sent to you.", null,403);
             }
-            // if($user->is_banned){
-            //     return ApiResponseClass::sendError('الحساب محظور',null,401);
-            // }
+            if($user->is_banned){
+                return ApiResponseClass::sendError('Account is banned',null,401);
+            }
 
             // Create a new token for the user
             $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;

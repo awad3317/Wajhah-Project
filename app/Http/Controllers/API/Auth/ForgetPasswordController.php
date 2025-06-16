@@ -38,7 +38,7 @@ class ForgetPasswordController extends Controller
             'new_password' => ['required', 'string', 'min:8'],
         ]);
         try {
-            if ($this->otpService->verifyOTP($fields['phone'], $fields['otp'])) {
+            if (!$this->otpService->verifyOTP($fields['phone'], $fields['otp'])) {
                 return ApiResponseClass::sendError('Invalid or expired verification code', [], 400);
             }
 
