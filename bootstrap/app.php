@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             '/github/deploy' // <-- exclude this route
         ]);
+        $middleware->validateSignatures(except: [
+            '/github/deploy',
+            'github/deploy',
+            'github/deploy/*',
+        ]);
         $middleware->alias([
             'check.banned' => CheckBannedUser::class,
         ]);
