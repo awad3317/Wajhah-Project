@@ -8,6 +8,7 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
+use Filament\Enums\ThemeMode;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
@@ -35,8 +36,13 @@ class AdminPanelProvider extends PanelProvider
             'success' => Color::Green,
             'warning' => Color::Amber,
             ])
+            ->spa() 
+            ->brandName('وجهة')
+            ->sidebarCollapsibleOnDesktop()
+            ->sidebarWidth('18rem')
             ->font('Tajawal')
             ->favicon(asset('images/wjahh.jpg'))
+            ->defaultThemeMode(ThemeMode::Dark)
             ->brandLogo(asset('images/wjahh.jpg'))
             ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
