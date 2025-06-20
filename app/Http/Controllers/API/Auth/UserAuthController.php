@@ -26,11 +26,10 @@ class UserAuthController extends Controller
             'phone'=>['required','string','min:9','max:15',Rule::unique('users')],
             'password' => ['required','string','min:6','confirmed',],
         ]);
-        // Store the new user using the UserRepository
+        
         $fields['user_type']='user';
         $user=$this->UserRepository->store($fields);
 
-        // Generate a random OTP and prepare it for sending
         $otp=$this->otpService->generateOTP($user->phone,'account_creation');
         $this->HypersenderService->sendTextMessage($user->phone,strval($otp));
 
@@ -44,11 +43,15 @@ class UserAuthController extends Controller
             'password' => ['required','string'],
         ]);
         $user=$this->UserRepository->findByPhone($fields['phone']);
-        // Check if the user exists and if the password is correct
+
+        if ($user && $user->user_type == 'admin') {
+            return ApiResponseClass::sendError('Admins cannot login through this application', null, 403);
+        }
+        
         if($user && Hash::check($fields['password'], $user->password)){
 
             if (is_null($user->phone_verified_at)) {
-                // Generate a random OTP and prepare it for sending
+                
                 $otp=$this->otpService->generateOTP($user->phone,'account_creation');
 
                 $this->HypersenderService->sendTextMessage($user->phone,strval($otp));
@@ -60,7 +63,6 @@ class UserAuthController extends Controller
                 return ApiResponseClass::sendError('Account is banned',null,401);
             }
 
-            // Create a new token for the user
             $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
             return ApiResponseClass::sendResponse([
                 'user' => $user,
