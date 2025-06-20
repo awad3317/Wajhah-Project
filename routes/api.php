@@ -18,7 +18,7 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
 
 });
 
-     //           Auth Route          //
+    //           Auth Route          //
 Route::post('/register',[UserAuthController::class,'register']);
 Route::post('/login',[UserAuthController::class,'login']);
 Route::post('/verifyOtpAndLogin',[OTPController::class,'verifyOtpAndLogin']);
