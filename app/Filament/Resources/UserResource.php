@@ -92,6 +92,10 @@ class UserResource extends Resource
                 ])
                 ->action(function (User $record, array $data) {
                     $record->update(['user_type' => $data['user_type']]);
+                    Notification::make()
+                    ->title('تم تغيير نوع المستخدم بنجاح')
+                    ->success()
+                    ->send();
                 })
         ])
         ->filters([
