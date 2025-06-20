@@ -6,6 +6,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\Auth\OtpController;
 use App\Http\Controllers\API\Auth\UserAuthController;
 use App\Http\Controllers\API\Auth\ForgetPasswordController;
+use App\Http\Controllers\API\BankController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -13,6 +14,7 @@ Route::get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::put('/user/{id}', [UserController::class, 'update']);
+    Route::get('/bank', [BankController::class, 'index']);
 
 });
 
