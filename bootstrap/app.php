@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
-            '/github/deploy' // <-- exclude this route
+            '/github/deploy'
         ]);
         $middleware->validateSignatures(except: [
             '/github/deploy',

@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'phone' => '967730236551',
             'password' => '12121212',
+            'phone_verified_at'=>now(),
             'user_type' => 'admin',
         ]);
 
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
             'name' => 'User',
             'phone' => '967730236552',
             'password' => '12121212',
+            'phone_verified_at'=>now(),
             'user_type' => 'user',
         ]);
     }
