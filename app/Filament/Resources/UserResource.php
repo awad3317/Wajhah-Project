@@ -21,7 +21,6 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'المستخدمين';
     protected static ?string $pluralModelLabel = 'المستخدمين';
-    protected static ?string $modelLabel = 'مستخدم';
 
     public static function form(Form $form): Form
     {
@@ -67,7 +66,7 @@ class UserResource extends Resource
                 ->formatStateUsing(fn (string $state): string => match ($state) {
                     'admin' => 'ادمن',
                     'user' => 'مستخدم',
-                    'owner' => 'اونر',
+                    'owner' => 'مالك منشئة',
                 }),
                 
             Tables\Columns\TextColumn::make('created_at')
@@ -86,7 +85,7 @@ class UserResource extends Resource
                         ->options([
                             'admin' => 'ادمن',
                             'user' => 'مستخدم',
-                            'owner' => 'اونر',
+                            'owner' => 'مالك منشئة',
                         ])
                         ->required()
                 ])
@@ -100,6 +99,7 @@ class UserResource extends Resource
         ])
         ->filters([
             Tables\Filters\SelectFilter::make('user_type')
+            ->label('نوع المتسخدم')
                 ->options([
                     'admin' => 'ادمن',
                     'user' => 'مستخدم',
