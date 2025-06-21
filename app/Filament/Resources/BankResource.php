@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BankResource\Pages;
 use App\Filament\Resources\BankResource\RelationManagers;
-use App\Models\Bank;
+use App\Models\bank;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BankResource extends Resource
 {
-    protected static ?string $model = Bank::class;
+    protected static ?string $model = bank::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
 
