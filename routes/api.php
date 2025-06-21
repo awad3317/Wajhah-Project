@@ -26,7 +26,7 @@ Route::post('/login',[UserAuthController::class,'login']);
 Route::post('/verifyOtpAndLogin',[OTPController::class,'verifyOtpAndLogin']);
 Route::post('/resendOTP',[OTPController::class,'resendOTP']);
 
-    //             Forget Password     //
+    //           Forget Password     //
 Route::post('/forgetPassword', [ForgetPasswordController::class,'forgetPassword']);
 Route::post('/resetPassword', [ForgetPasswordController::class,'resetPassword']);
 

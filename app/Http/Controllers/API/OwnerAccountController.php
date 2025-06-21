@@ -32,6 +32,9 @@ class OwnerAccountController extends Controller
      */
     public function store(Request $request)
     {
+        if (auth('sanctum')->user()->user_type !== 'owner') {
+            return ApiResponseClass::sendError('Unauthorized: Only Owners can create establishment types', [], 403);
+        }
         $fields=$request->validate([
             'bank_id'=>['required',Rule::exists('banks','id')],
             'account_number'=>['required','string','min:7','max:15'],
