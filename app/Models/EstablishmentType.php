@@ -14,4 +14,9 @@ class EstablishmentType extends Model
         'description',
         'icon',
     ];
+
+    public function establishments()
+    {
+        return $this->hasMany(Establishment::class);
+    }
 }

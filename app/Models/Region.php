@@ -20,4 +20,9 @@ class Region extends Model
     {
         return $this->hasMany(Region::class, 'parent_id');
     }
+
+    public function establishments()
+    {
+        return $this->hasMany(Establishment::class);
+    }
 }
