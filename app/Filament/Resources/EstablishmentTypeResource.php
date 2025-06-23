@@ -28,14 +28,17 @@ class EstablishmentTypeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('أسم المنشئة')
                     ->required()
                     ->maxLength(255),
 
                 Forms\Components\FileUpload::make('icon')
+                    ->label('الأيقونة')
                     ->image()
                     ->directory('establishment-types-icons'),
 
                 Forms\Components\Textarea::make('description')
+                    ->label('الوصف')
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 
@@ -47,22 +50,27 @@ class EstablishmentTypeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('icon')
+                    ->label('الأيقونة')
                     ->square()
                     ->disk('public')
                     ->url(fn ($record) => asset('storage/' . $record->icon)),
 
                 Tables\Columns\TextColumn::make('name')
+                    ->label('الأسم')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('description')
+                    ->label('الوصف')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('أنشئ في')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('تم التعديل في ')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
