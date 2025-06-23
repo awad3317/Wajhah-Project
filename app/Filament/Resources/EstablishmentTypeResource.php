@@ -36,7 +36,8 @@ class EstablishmentTypeResource extends Resource
                     ->label('الأيقونة')
                     ->required()
                     ->image()
-                    ->directory('Establishment-Type-Icons'),
+                    ->directory('Establishment-Type-Icons')
+                    ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
 
                 Forms\Components\Textarea::make('description')
                     ->label('الوصف')
@@ -55,8 +56,7 @@ class EstablishmentTypeResource extends Resource
                     ->label('الأيقونة')
                     ->square()
                     ->disk('public')
-                    ->url(fn ($record) => asset('storage/' . $record->icon))
-                    ->acceptedFileTypes(['image/svg+xml']),
+                    ->url(fn ($record) => asset('storage/' . $record->icon)),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('الأسم')
