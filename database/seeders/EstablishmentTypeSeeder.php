@@ -30,5 +30,8 @@ class EstablishmentTypeSeeder extends Seeder
             ],
             
         ];
+        foreach ($types as $type) {
+            EstablishmentType::create($type);
+        }
     }
 }
