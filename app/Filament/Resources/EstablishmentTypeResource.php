@@ -19,7 +19,9 @@ class EstablishmentTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'انواع المنشآت';
+    protected static ?string $navigationLabel = 'أنواع المنشآت';
+
+     protected static ?string $pluralModelLabel = 'أنواع المنشآت';
 
     public static function form(Form $form): Form
     {
