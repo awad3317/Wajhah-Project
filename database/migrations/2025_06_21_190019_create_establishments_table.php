@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('establishments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('type_id')->constrained('establishment_types')->onDelete('restrict');
-            $table->foreignId('region_id')->constrained('regions')->onDelete('restrict');
+            $table->foreignId('type_id')->constrained('establishment_types')->onDelete('cascade');
+            $table->foreignId('region_id')->constrained('regions')->onDelete('cascade');
             $table->string('name', 100);
             $table->text('description')->nullable();
             $table->string('primary_image');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
             
             $table->index(['owner_id', 'type_id', 'region_id']);
-            $table->timestamps();
+            
         });
     }
 
