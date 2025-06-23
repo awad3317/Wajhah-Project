@@ -34,11 +34,13 @@ class EstablishmentTypeResource extends Resource
 
                 Forms\Components\FileUpload::make('icon')
                     ->label('الأيقونة')
+                    ->required()
                     ->image()
-                    ->directory('establishment-types-icons'),
+                    ->directory('Establishment-Type-Icons'),
 
                 Forms\Components\Textarea::make('description')
                     ->label('الوصف')
+                    ->required()
                     ->maxLength(65535)
                     ->columnSpanFull(),
                 

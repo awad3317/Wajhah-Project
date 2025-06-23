@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('establishment_types', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->unique();
-            $table->text('description')->nullable();
-            $table->string('icon', 255)->nullable();
+            $table->text('description');
+            $table->string('icon', 255);
             $table->timestamps();
         });
     }
