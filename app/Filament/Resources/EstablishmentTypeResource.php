@@ -60,8 +60,7 @@ class EstablishmentTypeResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('description')
-                    ->label('الوصف')
-                    ->searchable(),
+                    ->label('الوصف'),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('أنشئ في')
