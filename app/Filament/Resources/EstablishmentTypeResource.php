@@ -32,7 +32,7 @@ class EstablishmentTypeResource extends Resource
                 Forms\Components\FileUpload::make('icon')
                     ->image()
                     ->directory('establishment-types-icons'),
-                    
+
                 Forms\Components\Textarea::make('description')
                     ->maxLength(65535)
                     ->columnSpanFull(),
@@ -45,7 +45,9 @@ class EstablishmentTypeResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('icon')
-                    ->square(),
+                    ->square()
+                    ->disk('public')
+                    ->url(fn ($record) => asset('storage/' . $record->icon)),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
