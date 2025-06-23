@@ -55,7 +55,8 @@ class EstablishmentTypeResource extends Resource
                     ->label('الأيقونة')
                     ->square()
                     ->disk('public')
-                    ->url(fn ($record) => asset('storage/' . $record->icon)),
+                    ->url(fn ($record) => asset('storage/' . $record->icon))
+                    ->acceptedFileTypes(['image/svg+xml']),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('الأسم')
