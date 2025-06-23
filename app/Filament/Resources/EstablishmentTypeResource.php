@@ -28,12 +28,13 @@ class EstablishmentTypeResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
                 Forms\Components\FileUpload::make('icon')
                     ->image()
                     ->directory('establishment-types-icons'),
+                Forms\Components\Textarea::make('description')
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
+                
             ]);
     }
 
