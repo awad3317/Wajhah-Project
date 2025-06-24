@@ -16,17 +16,17 @@ class EstablishmentTypeSeeder extends Seeder
             [
                 'name' => 'حجز صالات أفراح',
                 'description' => 'نقدم لك تجربة مميزة مع خدمات إستثنائية لضمان نجاح مناسبتك وتقديمها بشكل رائع.',
-                'icon' => 'storage/establishment-types-icons/Wedding-halls.svg',
+                'icon' => 'establishment-types-icons/Wedding-halls.svg',
             ],
             [
                 'name' => 'حجز مسابح',
                 'description' => 'استمتع بتجربة فريدة وخدمات استثنائية تضمن لك أوقاتًا ممتعة ومليئة بالرفاهية، احجز مسبحك بكل سهولة.',
-                'icon' => 'storage/establishment-types-icons/Swimming-pools.svg',
+                'icon' => 'establishment-types-icons/Swimming-pools.svg',
             ],
             [
                 'name' => 'حجز فنادق',
                 'description' => 'استمتع بتجربة حجز فنادق مميزة توفر لك الراحة والرفاهية، مع خدمات عالية الجودة.',
-                'icon' => 'storage/establishment-types-icons/Hotels.svg',
+                'icon' => 'establishment-types-icons/Hotels.svg',
             ],
             
         ];
