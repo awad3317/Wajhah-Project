@@ -27,7 +27,7 @@ class EstablishmentType extends Model
      *
      * @return string|null
      */
-    public function getFullIconUrlAttribute(): ?string
+    public function geticonAttribute(): ?string
     {
         if ($this->icon) {
             return Storage::disk('public')->url($this->icon);
