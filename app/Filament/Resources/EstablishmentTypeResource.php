@@ -56,7 +56,7 @@ class EstablishmentTypeResource extends Resource
                     ->label('الأيقونة')
                     ->square()
                     ->disk('public')
-                    ->url(fn ($record) => asset( $record->icon)),
+                    ->url(fn ($record) => asset( '/'.$record->icon)),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('الأسم')
