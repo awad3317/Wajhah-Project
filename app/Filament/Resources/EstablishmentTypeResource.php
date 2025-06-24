@@ -35,7 +35,7 @@ class EstablishmentTypeResource extends Resource
                 Forms\Components\FileUpload::make('icon')
                     ->label('الأيقونة')
                     ->required()
-                    ->image()
+                    ->image() 
                     ->directory('Establishment-Type-Icons')
                     ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
 
