@@ -8,6 +8,7 @@ use App\Http\Controllers\API\RegionController;
 use App\Http\Controllers\API\Auth\OtpController;
 use App\Http\Controllers\API\OwnerAccountController;
 use App\Http\Controllers\API\Auth\UserAuthController;
+use App\Http\Controllers\API\EstablishmentController;
 use App\Http\Controllers\API\EstablishmentTypeController;
 use App\Http\Controllers\API\Auth\ForgetPasswordController;
 
@@ -19,6 +20,8 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::get('/bank', [BankController::class, 'index']);
     Route::apiResource('/acount', OwnerAccountController::class)->except(['index','show']);
+    Route::apiResource('/Establishment', EstablishmentController::class)->except(['index','show']);
+
 });
 
     //           Auth Route          //
