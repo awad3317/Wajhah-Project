@@ -17,7 +17,7 @@ class RegionRepository implements RepositoriesInterface
 
     public function index()
     {
-        return Region::get();
+        return Region::select('id', 'name')->paginate(10);
     }
 
     /**
@@ -55,7 +55,7 @@ class RegionRepository implements RepositoriesInterface
     }
 
     public function getParents(){
-        return Region::whereNull('parent_id')->get();
+        return Region::select('id', 'name')->whereNull('parent_id')->get();
     }
 
     public function getChildren($id)
@@ -64,7 +64,7 @@ class RegionRepository implements RepositoriesInterface
         if (!$Region) {
             return collect(); 
         }
-        return Region::where('parent_id', $Region->id)->get();
+        return Region::select('id', 'name')->where('parent_id', $Region->id)->get();
     }
     
 }
