@@ -22,6 +22,6 @@ class EstablishmentType extends Model
 
     public function getIconAttribute($value)
      {
-         return $value . 'awd ' ;
+         return 'storage/'.$value   ;
      }
 }
