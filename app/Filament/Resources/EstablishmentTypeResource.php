@@ -36,8 +36,8 @@ class EstablishmentTypeResource extends Resource
                     ->label('الأيقونة')
                     ->required()
                     ->image() 
-                    ->directory('Establishment-Type-Icons')
-                    ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
+                    ->directory('establishment-type-icons'),
+                    // ->rules(['mimes:svg', 'mimetypes:image/svg+xml'])
 
                 Forms\Components\Textarea::make('description')
                     ->label('الوصف')
