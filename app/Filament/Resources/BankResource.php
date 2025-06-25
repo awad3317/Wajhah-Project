@@ -24,6 +24,8 @@ class BankResource extends Resource
     protected static ?string $navigationLabel = 'البنوك';
     protected static ?string $pluralModelLabel = 'البنوك';
 
+    protected static ?string $modelLabel = 'بنك';
+
     public static function form(Form $form): Form
     {
         return $form
