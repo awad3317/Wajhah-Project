@@ -21,7 +21,10 @@ class EstablishmentTypeResource extends Resource
 
     protected static ?string $navigationLabel = 'أنواع المنشآت';
 
-     protected static ?string $pluralModelLabel = 'أنواع المنشآت';
+    protected static ?string $pluralModelLabel = 'أنواع المنشآت';
+
+    protected static ?string $modelLabel = 'نوع المنشأة';
+
 
     public static function form(Form $form): Form
     {
