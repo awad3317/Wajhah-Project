@@ -89,7 +89,7 @@ class OwnerAccountController extends Controller
             if($this->OwnerAccountRepository->delete($id)){
                 return ApiResponseClass::sendResponse($account, "{$account->id} unsaved successfully.");
             }
-             return ApiResponseClass::sendError("Acount with ID {$id} may not be found or not deleted. Try again.");
+            return ApiResponseClass::sendError("Acount with ID {$id} may not be found or not deleted. Try again.");
         } catch (Exception $e) {
             return ApiResponseClass::sendError('Error deleting acount: ' . $e->getMessage());
         }

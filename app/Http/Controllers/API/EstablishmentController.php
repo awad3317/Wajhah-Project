@@ -42,22 +42,32 @@ class EstablishmentController extends Controller
         'images.*' => ['image', 'max:2048'],
         'latitude' => ['nullable','numeric'],
         'longitude' => ['nullable','numeric'],
+        'features' => ['nullable', 'array'],
+        'features.*.name' => ['required_with:features', 'string', 'max:100'],
+        'features.*.icon' => ['required', 'string', 'max:255'],
     ]);
     try {
-    $user = auth('sanctum')->user();
-    if ($user->user_type !== 'owner') {
-        return ApiResponseClass::sendError('Only users with owner type can create establishments',null,403);
-    }
-    $fields['owner_id'] = $user->id;
-    $fields['primary_image'] = $this->ImageService->saveImage($fields['primary_image'], 'establishments');
-    $establishment = $this->EstablishmentRepository->store($fields);
-    if ($request->hasFile('images')){
-        foreach ($request->file('images') as $image){
-            $imagePath = $this->ImageService->saveImage($image, 'establishments');
-            $establishment->images()->create(['image' => $imagePath]);  
+        $user = auth('sanctum')->user();
+        if ($user->user_type !== 'owner') {
+            return ApiResponseClass::sendError('Only users with owner type can create establishments',null,403);
         }
-    }
-    return ApiResponseClass::sendResponse($establishment,'establishment saved successfully.');
+        $fields['owner_id'] = $user->id;
+        $fields['primary_image'] = $this->ImageService->saveImage($fields['primary_image'], 'establishments');
+        $establishment = $this->EstablishmentRepository->store($fields);
+        
+        if ($request->hasFile('images')){
+            foreach ($request->file('images') as $image){
+                $imagePath = $this->ImageService->saveImage($image, 'establishments');
+                $establishment->images()->create(['image' => $imagePath]);  
+            }
+        }
+
+        if ($request->has('features')) {
+                foreach ($request->input('features') as $feature) {
+                    $establishment->features()->create($feature);
+                }
+        }
+        return ApiResponseClass::sendResponse($establishment,'establishment saved successfully.');
     } catch (Exception $e) {
         return ApiResponseClass::sendError('Error save establishment: ' . $e->getMessage());
     }

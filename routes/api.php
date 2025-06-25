@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Auth\UserAuthController;
 use App\Http\Controllers\API\EstablishmentController;
 use App\Http\Controllers\API\EstablishmentTypeController;
 use App\Http\Controllers\API\Auth\ForgetPasswordController;
+use App\Http\Controllers\API\EstablishmentFeatureController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -21,6 +22,7 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::get('/bank', [BankController::class, 'index']);
     Route::apiResource('/acount', OwnerAccountController::class)->except(['index','show']);
     Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
+    Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
 
 });
 
@@ -34,7 +36,7 @@ Route::post('/resendOTP',[OTPController::class,'resendOTP']);
 Route::post('/forgetPassword', [ForgetPasswordController::class,'forgetPassword']);
 Route::post('/resetPassword', [ForgetPasswordController::class,'resetPassword']);
 
-Route::get('/EstablishmentType', [EstablishmentTypeController::class, 'index']);
+Route::get('/establishmentType', [EstablishmentTypeController::class, 'index']);
 
 Route::get('/regions/parents', [RegionController::class,'getParents']);
 Route::get('/regions/{id}/children', [RegionController::class,'getChildren']);

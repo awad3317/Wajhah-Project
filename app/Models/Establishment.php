@@ -45,4 +45,9 @@ class Establishment extends Model
     {
         return $this->hasMany(EstablishmentImage::class);
     }
+
+    public function features()
+    {
+        return $this->hasMany(EstablishmentFeature::class);
+    }
 }
