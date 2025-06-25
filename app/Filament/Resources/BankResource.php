@@ -35,17 +35,13 @@ class BankResource extends Resource
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\FileUpload::make('logo_url')
-                    ->label('Logo')
-                    ->image()
-                    ->directory('banks/logos')
-                    ->getUploadedFileNameForStorageUsing(
-                        fn (TemporaryUploadedFile $file): string => 
-                            (string) str($file->getClientOriginalName())
-                                ->prepend('bank-logo-'),
-                    )
-                    ->downloadable()
-                    ->openable(),
+                Forms\Components\FileUpload::make('icon')
+                    ->label('الأيقونة')
+                    ->required()
+                    ->image() 
+                    ->avatar()
+                    ->directory('banks-logos')
+                    ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
             ]);
     }
 
