@@ -62,33 +62,39 @@ class EstablishmentTypeResource extends Resource
             '2xl' => 4,
         ])
         ->columns([
-            Stack::make([
-                // الأيقونة في الأعلى
+            Split::make([
                 Tables\Columns\ImageColumn::make('icon')
                     ->label('')
                     ->disk('public')
-                    ->width(120)  // عرض ثابت للأيقونة
-                    ->height(120)  // ارتفاع ثابت للأيقونة
                     ->grow(false)
-                    ->alignCenter(),  // توسيط الأيقونة
-                
-                // العنوان
-                Tables\Columns\TextColumn::make('name')
-                    ->label('')
-                    ->weight('bold')
-                    ->searchable()
-                    ->alignCenter(),  // توسيط العنوان
-                
-                // الوصف
-                Tables\Columns\TextColumn::make('description')
-                    ->label('')
-                    ->limit(100)  // زيادة الحد الأقصى للأحرف
-                    ->color('gray')
-                    ->alignCenter()  // توسيط الوصف
-                    ->size('sm'),  // حجم أصغر للوصف
-            ])
-            ->space(3)  // زيادة المسافة بين العناصر
-            ->alignCenter(),  // توسيط جميع محتويات البطاقة
+                    ->size(80),
+                    
+                Stack::make([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label('')
+                        ->weight('bold')
+                        ->searchable(),
+                        
+                    Tables\Columns\TextColumn::make('description')
+                        ->label('')
+                        ->limit(50)
+                        ->color('gray'),
+                        
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('created_at')
+                            ->label('أنشئ في')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                            
+                        Tables\Columns\TextColumn::make('updated_at')
+                            ->label('تم التعديل')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                    ])->space(1),
+                ])->space(2),
+            ]),
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
