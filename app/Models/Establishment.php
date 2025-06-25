@@ -58,4 +58,14 @@ class Establishment extends Model
     {
         return $this->hasMany(EstablishmentRule::class);
     }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\API\BankController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RegionController;
 use App\Http\Controllers\API\Auth\OtpController;
+use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\OwnerAccountController;
 use App\Http\Controllers\API\Auth\UserAuthController;
 use App\Http\Controllers\API\EstablishmentController;
@@ -25,6 +26,7 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
     Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
     Route::apiResource('/establishmentRule', EstablishmentRuleController::class)->except(['index','show']);
+    Route::apiResource('/favorite', FavoriteController::class)->except(['index','show','update']);
     
 });
 
