@@ -7,6 +7,8 @@ use App\Filament\Resources\EstablishmentTypeResource\RelationManagers;
 use App\Models\EstablishmentType;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -52,48 +54,53 @@ class EstablishmentTypeResource extends Resource
     }
 
     public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
+{
+    return $table
+        ->contentGrid([
+            'md' => 2,
+            'xl' => 3,
+            '2xl' => 4,
+        ])
+        ->columns([
+            Split::make([
                 Tables\Columns\ImageColumn::make('icon')
-                    ->label('الأيقونة')
-                    ->square()
+                    ->label('')
                     ->disk('public')
-                    ->url(fn ($record) => asset( '/'.$record->icon)),
-
-                Tables\Columns\TextColumn::make('name')
-                    ->label('الأسم')
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('description')
-                    ->label('الوصف'),
-
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('أنشئ في')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('تم التعديل في ')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+                    ->grow(false)
+                    ->size(80),
+                    
+                Stack::make([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label('')
+                        ->weight('bold')
+                        ->searchable(),
+                        
+                    Tables\Columns\TextColumn::make('description')
+                        ->label('')
+                        ->limit(50)
+                        ->color('gray'),
+                        
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('created_at')
+                            ->label('أنشئ في')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                            
+                        Tables\Columns\TextColumn::make('updated_at')
+                            ->label('تم التعديل')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                    ])->space(1),
+                ])->space(2),
+            ]),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make()->iconButton(),
+            Tables\Actions\DeleteAction::make()->iconButton(),
+        ]);
+}
 
     public static function getPages(): array
     {
