@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Auth\OtpController;
 use App\Http\Controllers\API\OwnerAccountController;
 use App\Http\Controllers\API\Auth\UserAuthController;
 use App\Http\Controllers\API\EstablishmentController;
+use App\Http\Controllers\API\EstablishmentRuleController;
 use App\Http\Controllers\API\EstablishmentTypeController;
 use App\Http\Controllers\API\Auth\ForgetPasswordController;
 use App\Http\Controllers\API\EstablishmentFeatureController;
@@ -23,7 +24,8 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::apiResource('/acount', OwnerAccountController::class)->except(['index','show']);
     Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
     Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
-
+    Route::apiResource('/establishmentRule', EstablishmentRuleController::class)->except(['index','show']);
+    
 });
 
     //           Auth Route          //

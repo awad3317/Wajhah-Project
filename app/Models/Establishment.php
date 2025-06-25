@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mehradsadeghi\FilterQueryString\FilterQueryString;
 
 class Establishment extends Model
 {
-    use HasFactory;
+    use HasFactory, FilterQueryString;
+
+    protected $filters = ['type_id','like'];
 
     protected $fillable = [
         'owner_id',
@@ -49,5 +52,10 @@ class Establishment extends Model
     public function features()
     {
         return $this->hasMany(EstablishmentFeature::class);
+    }
+
+    public function rules()
+    {
+        return $this->hasMany(EstablishmentRule::class);
     }
 }

@@ -22,9 +22,14 @@ class EstablishmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+            $establishments = $this->EstablishmentRepository->index($request);
+            return ApiResponseClass::sendResponse($establishments, 'All establishments retrieved successfully.');
+        } catch (Exception $e) {
+            return ApiResponseClass::sendError('Error retrieving establishments: ' . $e->getMessage());
+        } 
     }
 
     /**
@@ -45,6 +50,8 @@ class EstablishmentController extends Controller
         'features' => ['nullable', 'array'],
         'features.*.name' => ['required_with:features', 'string', 'max:100'],
         'features.*.icon' => ['required', 'string', 'max:255'],
+        'rules' => ['nullable', 'array'],
+        'rules.*' => ['string', 'max:1000'],
     ]);
     try {
         $user = auth('sanctum')->user();
@@ -62,12 +69,24 @@ class EstablishmentController extends Controller
             }
         }
 
-        if ($request->has('features')) {
-                foreach ($request->input('features') as $feature) {
-                    $establishment->features()->create($feature);
-                }
+        if (!empty($fields['features'])) {
+            foreach ($fields['features'] as $feature) {
+                $establishment->features()->create($feature);
+            }
         }
-        return ApiResponseClass::sendResponse($establishment,'establishment saved successfully.');
+        
+        if (!empty($fields['rules'])) {
+            foreach ($fields['rules'] as $rule) {
+                $establishment->rules()->create(['rule' => $rule]);
+            }
+        }
+        $establishment->load(['images', 'features', 'rules', 'type', 'region', 'owner']);
+        return ApiResponseClass::sendResponse([
+            'establishment' => $establishment,
+            'images' => $establishment->images,
+            'features' => $establishment->features,
+            'rules' => $establishment->rules]
+            ,'establishment saved successfully.');
     } catch (Exception $e) {
         return ApiResponseClass::sendError('Error save establishment: ' . $e->getMessage());
     }

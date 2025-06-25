@@ -15,9 +15,9 @@ class EstablishmentRepository implements RepositoriesInterface
         //
     }
 
-    public function index()
+    public function index($request)
     {
-        return Establishment::with(['region.parent'])->paginate(10);
+        return Establishment::with(['region.parent'])->filter()->paginate(10);
     }
 
     /**
