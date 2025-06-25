@@ -91,7 +91,7 @@ class EstablishmentTypeResource extends Resource
         ->label('عرض التفاصيل')
         ->button()
         ->size('sm')
-        ->url(fn ($record) => route('filament.resources.your-resource.view', $record))
+        ->url(fn ($record) => route('filament.resources.your-resource.view', $record)),
 
             ])
             ->space(3)  // زيادة المسافة بين العناصر
