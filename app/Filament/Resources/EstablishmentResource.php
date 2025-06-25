@@ -17,6 +17,8 @@ class EstablishmentResource extends Resource
 {
     protected static ?string $model = Establishment::class;
 
+    protected string $view = 'filament.tables.components.establishment-card';
+
       protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
     public static function form(Form $form): Form
