@@ -62,39 +62,33 @@ class EstablishmentTypeResource extends Resource
             '2xl' => 4,
         ])
         ->columns([
-            Split::make([
+            Stack::make([
+                // الأيقونة في الأعلى
                 Tables\Columns\ImageColumn::make('icon')
                     ->label('')
                     ->disk('public')
+                    ->width(120)  // عرض ثابت للأيقونة
+                    ->height(120)  // ارتفاع ثابت للأيقونة
                     ->grow(false)
-                    ->size(80),
-                    
-                Stack::make([
-                    Tables\Columns\TextColumn::make('name')
-                        ->label('')
-                        ->weight('bold')
-                        ->searchable(),
-                        
-                    Tables\Columns\TextColumn::make('description')
-                        ->label('')
-                        ->limit(50)
-                        ->color('gray'),
-                        
-                    Stack::make([
-                        Tables\Columns\TextColumn::make('created_at')
-                            ->label('أنشئ في')
-                            ->dateTime()
-                            ->size('sm')
-                            ->color('gray'),
-                            
-                        Tables\Columns\TextColumn::make('updated_at')
-                            ->label('تم التعديل')
-                            ->dateTime()
-                            ->size('sm')
-                            ->color('gray'),
-                    ])->space(1),
-                ])->space(2),
-            ]),
+                    ->alignCenter(),  // توسيط الأيقونة
+                
+                // العنوان
+                Tables\Columns\TextColumn::make('name')
+                    ->label('')
+                    ->weight('bold')
+                    ->searchable()
+                    ->alignCenter(),  // توسيط العنوان
+                
+                // الوصف
+                Tables\Columns\TextColumn::make('description')
+                    ->label('')
+                    ->limit(100)  // زيادة الحد الأقصى للأحرف
+                    ->color('gray')
+                    ->alignCenter()  // توسيط الوصف
+                    ->size('sm'),  // حجم أصغر للوصف
+            ])
+            ->space(3)  // زيادة المسافة بين العناصر
+            ->alignCenter(),  // توسيط جميع محتويات البطاقة
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
