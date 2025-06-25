@@ -53,35 +53,48 @@ class EstablishmentTypeResource extends Resource
             ]);
     }
 
-   public static function table(Table $table): Table
+    public static function table(Table $table): Table
 {
     return $table
-        ->columns([
-            Tables\Columns\ImageColumn::make('icon')
-                ->label('')
-                ->square()
-                ->disk('public')
-                ->width(80)
-                ->height(80)
-                ->grow(false),
-                
-            Tables\Columns\TextColumn::make('name')
-                ->label('الاسم')
-                ->weight('bold')
-                ->searchable(),
-                
-            Tables\Columns\TextColumn::make('description')
-                ->label('الوصف')
-                ->limit(50)
-                ->color('gray'),
-        ])
         ->contentGrid([
             'md' => 2,
             'xl' => 3,
             '2xl' => 4,
         ])
-        ->filters([
-            // الفلاتر هنا
+        ->columns([
+            Split::make([
+                Tables\Columns\ImageColumn::make('icon')
+                    ->label('')
+                    ->disk('public')
+                    ->grow(false)
+                    ->size(80),
+                    
+                Stack::make([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label('')
+                        ->weight('bold')
+                        ->searchable(),
+                        
+                    Tables\Columns\TextColumn::make('description')
+                        ->label('')
+                        ->limit(50)
+                        ->color('gray'),
+                        
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('created_at')
+                            ->label('أنشئ في')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                            
+                        Tables\Columns\TextColumn::make('updated_at')
+                            ->label('تم التعديل')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                    ])->space(1),
+                ])->space(2),
+            ]),
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
