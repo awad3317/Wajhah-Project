@@ -32,13 +32,10 @@ class EstablishmentTypeResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                
-
                 Forms\Components\Textarea::make('description')
                     ->label('الوصف')
                     ->required()
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
+                    ->maxLength(65535),
 
                 Forms\Components\FileUpload::make('icon')
                     ->label('الأيقونة')
