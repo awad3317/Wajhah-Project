@@ -70,7 +70,8 @@ class EstablishmentTypeResource extends Resource
                     ->width(120)  // عرض ثابت للأيقونة
                     ->height(120)  // ارتفاع ثابت للأيقونة
                     ->grow(false)
-                    ->alignCenter(),  // توسيط الأيقونة
+                    ->alignCenter()
+                    ->extraAttributes(['class' => 'rounded-full border-2 border-white shadow-md']),,  // توسيط الأيقونة
                 
                 // العنوان
                 Tables\Columns\TextColumn::make('name')
@@ -86,10 +87,18 @@ class EstablishmentTypeResource extends Resource
                     ->color('gray')
                     ->alignCenter()  // توسيط الوصف
                     ->size('sm'),  // حجم أصغر للوصف
+                Tables\Actions\Action::make('view')
+        ->label('عرض التفاصيل')
+        ->button()
+        ->size('sm')
+        ->url(fn ($record) => route('filament.resources.your-resource.view', $record))
+])->space(3)
             ])
             ->space(3)  // زيادة المسافة بين العناصر
             ->alignCenter()
-            ->extraAttributes(['class' => 'hover:shadow-lg transition-shadow']),  // توسيط جميع محتويات البطاقة
+            ->extraAttributes(['class' => 'hover:shadow-lg transition-shadow'])
+            ->extraAttributes(['class' => 'h-64'])
+            ->extraAttributes(['class' => 'border rounded-lg']),  // توسيط جميع محتويات البطاقة
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
