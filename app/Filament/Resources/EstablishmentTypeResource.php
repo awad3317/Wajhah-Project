@@ -32,6 +32,14 @@ class EstablishmentTypeResource extends Resource
                     ->required()
                     ->maxLength(255),
 
+                
+
+                Forms\Components\Textarea::make('description')
+                    ->label('الوصف')
+                    ->required()
+                    ->maxLength(65535)
+                    ->columnSpanFull(),
+
                 Forms\Components\FileUpload::make('icon')
                     ->label('الأيقونة')
                     ->required()
@@ -39,12 +47,6 @@ class EstablishmentTypeResource extends Resource
                     ->avatar()
                     ->directory('establishment-type-icons')
                     ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
-
-                Forms\Components\Textarea::make('description')
-                    ->label('الوصف')
-                    ->required()
-                    ->maxLength(65535)
-                    ->columnSpanFull(),
                 
             ]);
     }
