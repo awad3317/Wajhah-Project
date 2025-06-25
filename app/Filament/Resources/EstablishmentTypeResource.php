@@ -87,12 +87,7 @@ class EstablishmentTypeResource extends Resource
                     ->color('gray')
                     ->alignCenter()  // توسيط الوصف
                     ->size('sm'),  // حجم أصغر للوصف
-                Tables\Actions\Action::make('view')
-        ->label('عرض التفاصيل')
-        ->button()
-        ->size('sm')
-        ->url(fn ($record) => route('filament.resources.your-resource.view', $record)),
-
+                    
             ])
             ->space(3)  // زيادة المسافة بين العناصر
             ->alignCenter()
