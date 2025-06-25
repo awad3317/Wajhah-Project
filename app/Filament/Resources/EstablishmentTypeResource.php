@@ -88,10 +88,7 @@ class EstablishmentTypeResource extends Resource
                     ->size('sm'),  // حجم أصغر للوصف
             ])
             ->space(3)  // زيادة المسافة بين العناصر
-            ->alignCenter()
-            ->extraAttributes(['class' => 'hover:shadow-lg transition-shadow'])
-            ->extraAttributes(['class' => 'h-64'])
-            ->extraAttributes(['class' => 'border rounded-lg']),  // توسيط جميع محتويات البطاقة
+            ->alignCenter(),  // توسيط جميع محتويات البطاقة
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
