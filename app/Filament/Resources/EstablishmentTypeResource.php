@@ -92,7 +92,7 @@ class EstablishmentTypeResource extends Resource
         ->button()
         ->size('sm')
         ->url(fn ($record) => route('filament.resources.your-resource.view', $record))
-])->space(3)
+
             ])
             ->space(3)  // زيادة المسافة بين العناصر
             ->alignCenter()
