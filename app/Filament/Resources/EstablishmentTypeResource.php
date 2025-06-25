@@ -70,8 +70,7 @@ class EstablishmentTypeResource extends Resource
                     ->width(120)  // عرض ثابت للأيقونة
                     ->height(120)  // ارتفاع ثابت للأيقونة
                     ->grow(false)
-                    ->alignCenter()
-                    ->extraAttributes(['class' => 'rounded-full border-2 border-white shadow-md']),,  // توسيط الأيقونة
+                    ->alignCenter(),  // توسيط الأيقونة
                 
                 // العنوان
                 Tables\Columns\TextColumn::make('name')
@@ -87,7 +86,6 @@ class EstablishmentTypeResource extends Resource
                     ->color('gray')
                     ->alignCenter()  // توسيط الوصف
                     ->size('sm'),  // حجم أصغر للوصف
-                    
             ])
             ->space(3)  // زيادة المسافة بين العناصر
             ->alignCenter()
