@@ -16,7 +16,7 @@ class bank extends Model
      */
     protected $fillable = [
         'name',
-        'logo_url',
+        'icon',
     ];
 
     /**

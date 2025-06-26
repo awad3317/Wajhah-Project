@@ -35,7 +35,7 @@ class BankResource extends Resource
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\FileUpload::make('logo_url')
+                Forms\Components\FileUpload::make('icon')
                     ->label('الأيقونة')
                     ->required()
                     ->image() 
@@ -49,7 +49,7 @@ class BankResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('logo_url')
+                Tables\Columns\ImageColumn::make('icon')
                     ->disk('public')
                     ->width(80)  
                     ->height(80)  
