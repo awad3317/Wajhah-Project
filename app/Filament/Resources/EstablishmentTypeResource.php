@@ -62,26 +62,39 @@ class EstablishmentTypeResource extends Resource
             '2xl' => 4,
         ])
         ->columns([
-            Stack::make([
+            Split::make([
                 Tables\Columns\ImageColumn::make('icon')
                     ->label('')
                     ->disk('public')
                     ->grow(false)
-                    ->size(80)
-                    ->alignCenter(),
+                    ->size(80),
                     
-                Tables\Columns\TextColumn::make('name')
-                    ->label('')
-                    ->weight('bold')
-                    ->searchable()
-                    ->alignCenter(),
-                    
-                Tables\Columns\TextColumn::make('description')
-                    ->label('')
-                    ->limit(50)
-                    ->color('gray')
-                    ->alignCenter(),
-            ])->space(2),
+                Stack::make([
+                    Tables\Columns\TextColumn::make('name')
+                        ->label('')
+                        ->weight('bold')
+                        ->searchable(),
+                        
+                    Tables\Columns\TextColumn::make('description')
+                        ->label('')
+                        ->limit(50)
+                        ->color('gray'),
+                        
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('created_at')
+                            ->label('أنشئ في')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                            
+                        Tables\Columns\TextColumn::make('updated_at')
+                            ->label('تم التعديل')
+                            ->dateTime()
+                            ->size('sm')
+                            ->color('gray'),
+                    ])->space(1),
+                ])->space(2),
+            ]),
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
