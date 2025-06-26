@@ -40,7 +40,7 @@ class BankResource extends Resource
                     ->required()
                     ->image() 
                     ->avatar()
-                    ->directory('banks-logos')
+                    ->directory('banks/logos')
                     ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
             ]);
     }
@@ -49,10 +49,12 @@ class BankResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('logo_url')
-                    ->label('اللوقو')
+                Tables\Columns\ImageColumn::make('icon')
                     ->disk('public')
-                    ->url(fn ($record) => asset(':8000/storage/' . $record->logo_url)),
+                    ->width(80)  
+                    ->height(80)  
+                    ->grow(false)
+                    ->alignCenter(),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
