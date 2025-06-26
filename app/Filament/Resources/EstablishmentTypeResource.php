@@ -46,7 +46,6 @@ class EstablishmentTypeResource extends Resource
                     ->label('الأيقونة')
                     ->required()
                     ->image() 
-                    ->avatar()
                     ->directory('establishment-type-icons')
                     ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
                 
