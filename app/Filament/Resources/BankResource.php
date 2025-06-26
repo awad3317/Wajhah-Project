@@ -49,7 +49,7 @@ class BankResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('icon')
+                Tables\Columns\ImageColumn::make('logo_url')
                     ->disk('public')
                     ->width(80)  
                     ->height(80)  
