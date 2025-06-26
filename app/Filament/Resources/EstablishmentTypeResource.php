@@ -63,32 +63,26 @@ class EstablishmentTypeResource extends Resource
         ])
         ->columns([
             Stack::make([
-                // الأيقونة في الأعلى
                 Tables\Columns\ImageColumn::make('icon')
-                    ->label('')
                     ->disk('public')
-                    ->width(120)  // عرض ثابت للأيقونة
-                    ->height(120)  // ارتفاع ثابت للأيقونة
+                    ->width(80)  
+                    ->height(80)  
                     ->grow(false)
-                    ->alignCenter(),  // توسيط الأيقونة
-                
-                // العنوان
+                    ->alignCenter(), 
+            
                 Tables\Columns\TextColumn::make('name')
-                    ->label('')
                     ->weight('bold')
                     ->searchable()
-                    ->alignCenter(),  // توسيط العنوان
+                    ->alignCenter(),  
                 
-                // الوصف
                 Tables\Columns\TextColumn::make('description')
-                    ->label('')
-                    ->limit(100)  // زيادة الحد الأقصى للأحرف
+                    ->limit(100)  
                     ->color('gray')
-                    ->alignCenter()  // توسيط الوصف
-                    ->size('sm'),  // حجم أصغر للوصف
+                    ->alignCenter()  
+                    ->size('sm'),  
             ])
-            ->space(3)  // زيادة المسافة بين العناصر
-            ->alignCenter(),  // توسيط جميع محتويات البطاقة
+            ->space(3)  
+            ->alignCenter(),  
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
