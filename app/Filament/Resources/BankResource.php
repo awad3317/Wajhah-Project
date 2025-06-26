@@ -35,7 +35,7 @@ class BankResource extends Resource
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
 
-                Forms\Components\FileUpload::make('icon')
+                Forms\Components\FileUpload::make('logo_url')
                     ->label('الأيقونة')
                     ->required()
                     ->image() 
