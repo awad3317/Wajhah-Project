@@ -31,6 +31,7 @@ class BankResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->lable('أسم البنك')
                     ->required()
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
@@ -54,7 +55,8 @@ class BankResource extends Resource
                     ->width(80)  
                     ->height(80)  
                     ->grow(false)
-                    ->alignCenter(),
+                    ->alignCenter()
+                    ->label('الأيقونة'),,
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
