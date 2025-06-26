@@ -63,12 +63,12 @@ class EstablishmentTypeResource extends Resource
         ])
         ->columns([
             Stack::make([
-                Tables\Columns\ImageColumn::make('icon')
-                    ->label('')
-                    ->disk('public')
-                    ->grow(false)
-                    ->size(80)
-                    ->alignment('center'),
+                // Tables\Columns\ImageColumn::make('icon')
+                //     ->label('')
+                //     ->disk('public')
+                //     ->grow(false)
+                //     ->size(80)
+                //     ->alignment('center'),
                     
                 Tables\Columns\TextColumn::make('name')
                     ->label('')
