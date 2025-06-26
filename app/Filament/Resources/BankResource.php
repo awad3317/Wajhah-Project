@@ -31,7 +31,6 @@ class BankResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->lable('أسم البنك')
                     ->required()
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
@@ -77,6 +76,7 @@ class BankResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    
                 ]),
             ]);
     }
