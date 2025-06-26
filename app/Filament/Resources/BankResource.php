@@ -31,7 +31,7 @@ class BankResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label('أسم البنك')
+                    ->lable('أسم البنك')
                     ->required()
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
@@ -59,9 +59,9 @@ class BankResource extends Resource
                     ->alignCenter(),
 
                 Tables\Columns\TextColumn::make('name')
-                    ->label('أسم البنك')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('أسم البنك'),
                     
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
