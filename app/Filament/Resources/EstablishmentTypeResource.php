@@ -2,18 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EstablishmentTypeResource\Pages;
-use App\Filament\Resources\EstablishmentTypeResource\RelationManagers;
-use App\Models\EstablishmentType;
 use Filament\Forms;
+use Filament\Tables;
 use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use App\Models\EstablishmentType;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Columns\Layout\Component;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EstablishmentTypeResource\Pages;
+use App\Filament\Resources\EstablishmentTypeResource\RelationManagers;
 
 class EstablishmentTypeResource extends Resource
 {
@@ -79,9 +80,12 @@ class EstablishmentTypeResource extends Resource
                     ->color('gray')
                     ->alignCenter()  
                     ->size('sm'),  
+                Component::make()
+                    ->grow(),
             ])
             ->space(3)  
-            ->alignCenter(),  
+            ->alignCenter()
+            ->extraAttributes(['style' => 'height: 300px;']), ,  
         ])
         ->actions([
             Tables\Actions\EditAction::make()->iconButton(),
