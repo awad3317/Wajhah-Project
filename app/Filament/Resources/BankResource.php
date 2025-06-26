@@ -31,7 +31,7 @@ class BankResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->lable('أسم البنك')
+                    ->label('أسم البنك')
                     ->required()
                     ->maxLength(100)
                     ->unique(ignoreRecord: true),
