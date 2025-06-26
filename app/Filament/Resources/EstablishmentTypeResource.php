@@ -68,7 +68,7 @@ class EstablishmentTypeResource extends Resource
                     ->disk('public')
                     ->grow(false)
                     ->size(80)
-                    ->alignCenter(),
+                    ->extraImgAttributes(['style' => 'display: block; margin-left: auto; margin-right: auto;']),
                     
                 Tables\Columns\TextColumn::make('name')
                     ->label('')
