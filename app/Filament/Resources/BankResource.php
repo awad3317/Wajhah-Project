@@ -51,17 +51,17 @@ class BankResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('icon')
+                    ->label('الأيقونة')
                     ->disk('public')
                     ->width(80)  
                     ->height(80)  
                     ->grow(false)
-                    ->alignCenter()
-                    ->label('الأيقونة'),,
+                    ->alignCenter(),
 
                 Tables\Columns\TextColumn::make('name')
+                    ->label('أسم البنك')
                     ->searchable()
-                    ->sortable()
-                    ->label('أسم البنك'),
+                    ->sortable(),
                     
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
