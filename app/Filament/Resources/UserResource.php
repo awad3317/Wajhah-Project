@@ -40,6 +40,12 @@ class UserResource extends Resource
             Tables\Columns\TextColumn::make('phone')
                 ->searchable()
                 ->label('رقم الجوال'),
+            Tables\Columns\TextColumn::make('phone_verified_at')
+                ->label('تاريخ التحقق')
+                ->dateTime('d/m/Y H:i') 
+                ->sortable()
+                ->toggleable(isToggledHiddenByDefault: false) // يمكن جعله مخفيًا افتراضيًا إذا أردت
+                ->placeholder('لم يتم التحقق') ,
                 
             Tables\Columns\ToggleColumn::make('is_banned')
                 ->label('الحظر')
