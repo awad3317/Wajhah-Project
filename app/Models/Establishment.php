@@ -26,6 +26,14 @@ class Establishment extends Model
         'is_active'
     ];
 
+    public function getPrimaryImageAttribute($value)
+    {
+        if (request()->is('api/*')) {
+            return 'storage/'.$value;
+        }
+        return $value;
+    }
+
     // Relationship with owner (User)
     public function owner()
     {
