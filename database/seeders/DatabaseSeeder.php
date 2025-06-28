@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             RegionsSeeder::class,
             EstablishmentTypeSeeder::class,
-            Establishment::class,
-            review::class,
+            establishmentSeeder::class,
+            reviewSeeder::class,
         ]);
     }
 }

@@ -22,12 +22,12 @@ class reviewSeeder extends Seeder
             [
                 'user_id' =>3,
                 'establishment_id' =>2 ,
-                'rating' => 4,
+                'rating' => 2,
             ],
             [
                 'user_id' =>3,
                 'establishment_id' =>3 ,
-                'rating' => 4,
+                'rating' => 5,
             ],
             
         ];
