@@ -23,6 +23,8 @@ class UserAuthController extends Controller
     public function register(Request $request){
         $fields=$request->validate([
             'phone'=>['required','string','min:9','max:15',Rule::unique('users')],
+            'password' => ['required','string','min:6','confirmed',],
+            'name'=>['required','string','max:100'],
         ]);
         
         // $fields['user_type']='user';
