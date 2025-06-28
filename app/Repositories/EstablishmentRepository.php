@@ -17,7 +17,7 @@ class EstablishmentRepository implements RepositoriesInterface
 
     public function index($request)
     {
-        return Establishment::with(['region.parent'])->filter()->paginate(10);
+        return Establishment::with(['region.parent'])->withAvg('reviews', 'rating')->filter()->paginate(10);
     }
 
     /**

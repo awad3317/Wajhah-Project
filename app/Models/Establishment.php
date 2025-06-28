@@ -69,4 +69,20 @@ class Establishment extends Model
     {
         return $this->belongsToMany(User::class, 'favorites');
     }
+
+    /**
+     * Get the price packages for the establishment.
+     */
+    public function pricePackages()
+    {
+        return $this->hasMany(PricePackage::class);
+    }
+
+    /**
+     * Get the reviews for the establishment.
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

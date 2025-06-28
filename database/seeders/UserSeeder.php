@@ -22,8 +22,16 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'User',
+            'name' => 'Owner',
             'phone' => '967730236552',
+            'password' => '12121212',
+            'phone_verified_at'=>now(),
+            'user_type' => 'owner',
+        ]);
+
+        User::create( [
+            'name' => 'User',
+            'phone' => '967730236553',
             'password' => '12121212',
             'phone_verified_at'=>now(),
             'user_type' => 'user',

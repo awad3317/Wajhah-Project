@@ -23,6 +23,6 @@ class Region extends Model
 
     public function establishments()
     {
-        return $this->hasMany(Establishment::class);
+        return $this->hasMany(Establishment::class,'region_id');
     }
 }
