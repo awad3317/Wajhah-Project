@@ -19,6 +19,7 @@ class Establishment extends Model
         'name',
         'description',
         'primary_image',
+        'address',
         'latitude',
         'longitude',
         'is_verified',

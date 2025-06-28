@@ -43,6 +43,7 @@ class EstablishmentController extends Controller
         'name' => ['required','string','max:255'],
         'description' => ['nullable','string'],
         'primary_image' => ['required','image','max:2048'],
+        'address'=>['required','string'],
         'images' => ['nullable', 'array'],
         'images.*' => ['image', 'max:2048'],
         'latitude' => ['nullable','numeric'],
