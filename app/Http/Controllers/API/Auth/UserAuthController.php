@@ -22,18 +22,16 @@ class UserAuthController extends Controller
     }
     public function register(Request $request){
         $fields=$request->validate([
-            'name'=>['required','string','max:100'],
             'phone'=>['required','string','min:9','max:15',Rule::unique('users')],
-            'password' => ['required','string','min:6','confirmed',],
         ]);
         
-        $fields['user_type']='user';
-        $user=$this->UserRepository->store($fields);
+        // $fields['user_type']='user';
+        // $user=$this->UserRepository->store($fields);
 
-        $otp=$this->otpService->generateOTP($user->phone,'account_creation');
-        $this->HypersenderService->sendTextMessage($user->phone,strval($otp));
+        $otp=$this->otpService->generateOTP($fields['phone'],'account_creation');
+        $this->HypersenderService->sendTextMessage($fields['phone'],strval($otp));
 
-        return ApiResponseClass::sendResponse($user,'تم إرسال رمز التحقق الى رقم الهاتف :'. $user->phone);
+        return ApiResponseClass::sendResponse($fields['phone'],'تم إرسال رمز التحقق الى رقم الهاتف :'. $fields['phone']);
     }
 
     public function login(Request $request)

@@ -34,8 +34,10 @@ class OtpController extends Controller
 
     public function verifyOtpAndLogin(Request $request) {
         $fields=$request->validate([
-            'phone'=>['required',Rule::exists('users', 'phone')],
+            'phone'=>['required',Rule::exists('otps', 'phone'),Rule::unique('users')],
             'otp' => ['required','numeric'],
+            'password' => ['required','string','min:6','confirmed',],
+            'name'=>['required','string','max:100'],
         ]);
         try {
             // Verify the provided OTP using the OTP service
@@ -46,13 +48,13 @@ class OtpController extends Controller
                     401 
                 );
             }
-            $user=$this->UserRepository->findByPhone($fields['phone']);
 
-            // Update the user record to mark phone as verified
-            $this->UserRepository->update(['phone_verified_at'=>now()],$user->id);
+            $fields['user_type']='user';
+            $fields['phone_verified_at'] = now(); 
+            $user=$this->UserRepository->store($fields);
             
             // Create a new authentication token for the user
-            $token = $user->createToken($user->username . '-AuthToken')->plainTextToken;
+            $token = $user->createToken($user->name . '-AuthToken')->plainTextToken;
             $user->token=$token;
             return ApiResponseClass::sendResponse([
                 'user' => $user,
