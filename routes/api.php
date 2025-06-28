@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::get('/bank', [BankController::class, 'index']);
     Route::apiResource('/acount', OwnerAccountController::class)->except(['index','show']);
-    Route::apiResource('/establishment', EstablishmentController::class)->except(['show']);
+    Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
     Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
     Route::apiResource('/establishmentRule', EstablishmentRuleController::class)->except(['index','show']);
     Route::apiResource('/favorite', FavoriteController::class)->except(['index','show','update']);
@@ -45,6 +45,7 @@ Route::post('/forgetPassword', [ForgetPasswordController::class,'forgetPassword'
 Route::post('/resetPassword', [ForgetPasswordController::class,'resetPassword']);
 
 Route::get('/establishmentType', [EstablishmentTypeController::class, 'index']);
+Route::get('/establishment', [EstablishmentController::class, 'index']);
 
 Route::get('/regions/parents', [RegionController::class,'getParents']);
 Route::get('/regions/{id}/children', [RegionController::class,'getChildren']);
