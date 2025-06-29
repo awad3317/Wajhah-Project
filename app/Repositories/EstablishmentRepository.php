@@ -18,7 +18,14 @@ class EstablishmentRepository implements RepositoriesInterface
     public function index($request)
     {
         return Establishment::select(['id', 'name','primary_image','region_id'])
-        ->with(['region','region.parent'])
+        ->with([
+            'region' => function ($query) {
+                $query->select('id', 'name', 'parent_id');
+            },
+            'region.parent' => function ($query) {
+                $query->select('id', 'name'); 
+            }
+        ])
         ->withAvg('reviews', 'rating')
         ->filter()
         ->paginate(10);
