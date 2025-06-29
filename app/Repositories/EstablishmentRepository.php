@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Repositories;
-use App\Interfaces\RepositoriesInterface;
+use App\Models\Region;
 use App\Models\Establishment;
 use Illuminate\Support\Facades\DB;
+use App\Interfaces\RepositoriesInterface;
 
 class EstablishmentRepository implements RepositoriesInterface
 {
@@ -17,19 +18,30 @@ class EstablishmentRepository implements RepositoriesInterface
 
     public function index($request)
     {
-        return Establishment::select(['id', 'name','primary_image','region_id'])
-        ->with([
-            'region' => function ($query) {
-                $query->select('id', 'name', 'parent_id');
-            },
-            'region.parent' => function ($query) {
-                $query->select('id', 'name'); 
+        $query = Establishment::select(['id', 'name', 'primary_image', 'region_id'])
+            ->with([
+                'region' => function ($q) {
+                    $q->select('id', 'name', 'parent_id');
+                },
+                'region.parent' => function ($q) {
+                    $q->select('id', 'name');
+                }
+            ])
+            ->withAvg('reviews', 'rating');
+
+        $region_id = $request->query('region_id');
+        if ($region_id) {
+            $region = Region::with('children')->where('slug', $region_id)->first();
+            if ($region) {
+                $regionIds = $region->children()->pluck('id')->push($region->id);
+                $allRegionIds = Region::whereIn('parent_id', $regionIds)->pluck('id');
+                $regionIds = $regionIds->merge($allRegionIds);
+                $query->whereIn('region_id', $regionIds);
             }
-        ])
-        ->withAvg('reviews', 'rating')
-        ->filter()
-        ->paginate(10);
+        }
+        return $query->filter()->paginate(10);
     }
+    
 
     /**
      * Retrieve a Establishment by ID.
