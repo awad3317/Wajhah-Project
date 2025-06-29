@@ -39,8 +39,7 @@ class BankResource extends Resource
                     ->label('الأيقونة')
                     ->required()
                     ->image() 
-                    ->avatar()
-                    ->directory('banks/logos')
+                    ->directory('banks-logos')
                     // ->rules(['mimes:svg', 'mimetypes:image/svg+xml']),
             ]);
     }
