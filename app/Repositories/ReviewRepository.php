@@ -53,5 +53,12 @@ class ReviewRepository implements RepositoriesInterface
     {
         return Review::where('id', $id)->delete() > 0;
     }
+
+    public function getByUserIdAndEstablishmentId($user_id,$establishment_id)
+    {
+        return Review::where('user_id', $user_id)
+                        ->where('establishment_id', $establishment_id)
+                        ->first();
+    }
     
 }

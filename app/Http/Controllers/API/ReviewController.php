@@ -19,9 +19,25 @@ class ReviewController extends Controller
         //
     }
 
+    public function upsertReview(Request $request)
+    {
+        $fields=$request->validate([
+            'establishment_id' => ['required',Rule::exists('establishments','id')], 
+            'rating' =>['required','integer','min:1','max:5'], 
+        ]);
+        $fields['user_id'] = auth('sanctum')->id();
+        $review=$this->ReviewRepository->getByUserIdAndEstablishmentId($fields['user_id'], $fields['establishment_id']);
+        if($review){
+            $this->ReviewRepository->update($fields, $review->id);
+            return ApiResponseClass::sendResponse($review, 'Review updated successfully.');
+        }
+        $review = $this->ReviewRepository->store($fields);
+        return ApiResponseClass::sendResponse($review, 'Review created successfully.');
+    }
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
         //
