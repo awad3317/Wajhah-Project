@@ -21,9 +21,7 @@ class EstablishmentRepository implements RepositoriesInterface
         ->with(['region' => function ($query) {
                 $query->select('id', 'name');
             },
-            'region.parent' => function ($query) {
-                $query->select('id', 'name');
-            }
+            'region.parent' 
         ])
         ->withAvg('reviews', 'rating')
         ->filter()
