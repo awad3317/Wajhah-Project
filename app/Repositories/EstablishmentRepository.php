@@ -31,7 +31,7 @@ class EstablishmentRepository implements RepositoriesInterface
 
         $region_id = $request->query('region_id');
         if ($region_id) {
-            $region = Region::with('children')->where('slug', $region_id)->first();
+            $region = Region::with('children')->where('id', $region_id)->first();
             if ($region) {
                 $regionIds = $region->children()->pluck('id')->push($region->id);
                 $allRegionIds = Region::whereIn('parent_id', $regionIds)->pluck('id');
