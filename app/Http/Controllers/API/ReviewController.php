@@ -28,7 +28,7 @@ class ReviewController extends Controller
         $fields['user_id'] = auth('sanctum')->id();
         $review=$this->ReviewRepository->getByUserIdAndEstablishmentId($fields['user_id'], $fields['establishment_id']);
         if($review){
-            $this->ReviewRepository->update($fields, $review->id);
+            $review=$this->ReviewRepository->update($fields, $review->id);
             return ApiResponseClass::sendResponse($review, 'Review updated successfully.');
         }
         $review = $this->ReviewRepository->store($fields);
