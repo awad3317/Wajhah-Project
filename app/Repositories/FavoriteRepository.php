@@ -15,9 +15,9 @@ class FavoriteRepository implements RepositoriesInterface
         //
     }
 
-    public function index()
+    public function index($userId)
     {
-        return Favorite::get();
+        return Favorite::with(['establishment','user'])->where('user_id','=',$userId)->paginate(10);
     }
 
     /**

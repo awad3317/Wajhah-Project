@@ -25,7 +25,8 @@ class FavoriteController extends Controller
     public function index()
     {
         try {
-            $Favorite = $this->FavoriteRepository->index();
+            $userId=auth('sanctum')->id();
+            $Favorite = $this->FavoriteRepository->index($userId);
             return ApiResponseClass::sendResponse($Favorite, 'Establishment Favorite retrieved successfully.');
         } catch (Exception $e) {
             return ApiResponseClass::sendError('An error occurred while fetching Favorite.', $e->getMessage());
