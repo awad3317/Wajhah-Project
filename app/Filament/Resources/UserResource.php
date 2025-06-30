@@ -94,7 +94,8 @@ class UserResource extends Resource
                             'owner' => 'مالك منشئة',
                         ])
                         ->required()
-                ])
+                        ])
+                        ])
                 ->actions([
                     // إضافة زر العرض
                     Tables\Actions\ViewAction::make(),
