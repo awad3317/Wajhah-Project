@@ -128,7 +128,7 @@ class UserResource extends Resource
     {
         return [
             EstablishmentsRelationManager::make(
-             'establishments' // اسم العلاقة في موديل User
+                relationship: 'establishments' // اسم العلاقة في موديل User
             ),
         ];
     }
