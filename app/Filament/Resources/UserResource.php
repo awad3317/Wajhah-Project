@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
-use App\Filament\Resources\RelationManager\EstablishmentsRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -127,9 +126,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            EstablishmentsRelationManager::make([
-                'relationship' => 'establishments', // Pass the relationship name as a key-value pair in an array
-            ]),
+           //
         ];
     }
 
