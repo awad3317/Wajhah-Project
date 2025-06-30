@@ -82,10 +82,6 @@ class UserResource extends Resource
                 ->toggleable(isToggledHiddenByDefault: true),
         ])
         ->actions([
-            // إضافة زر العرض
-            Tables\Actions\ViewAction::make(),
-            // زر التعديل (لتعديل البيانات الأساسية مثل الاسم ورقم الجوال)
-            Tables\Actions\EditAction::make(),
             Tables\Actions\Action::make('changeType')
                 ->label('تغيير نوع المستخدم')
                 ->hidden(fn (User $record): bool => $record->id == 1)
@@ -102,10 +98,10 @@ class UserResource extends Resource
                 ->action(function (User $record, array $data) {
                     $record->update(['user_type' => $data['user_type']]);
                     Notification::make()
-                        ->title('تم تغيير نوع المستخدم بنجاح')
-                        ->success()
-                        ->send();
-                }),
+                    ->title('تم تغيير نوع المستخدم بنجاح')
+                    ->success()
+                    ->send();
+                })
         ])
         ->filters([
             Tables\Filters\SelectFilter::make('user_type')
