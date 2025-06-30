@@ -82,6 +82,7 @@ class UserResource extends Resource
                 ->toggleable(isToggledHiddenByDefault: true),
         ])
         ->actions([
+            Tables\Actions\ViewAction::make(),
             Tables\Actions\Action::make('changeType')
                 ->label('تغيير نوع المستخدم')
                 ->hidden(fn (User $record): bool => $record->id == 1)
