@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
-use App\Filament\Resources\EstablishmentsRelationManager;
+use App\Filament\Resources\RelationManager\EstablishmentsRelationManager;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
