@@ -57,7 +57,6 @@ class RegionResource extends Resource
                 Tables\Columns\TextColumn::make('parent.name') 
                     ->searchable()
                     ->sortable()
-                    ->nullable()
                     ->default('N/A') 
                     ->label('المحافظة'),
             ])
