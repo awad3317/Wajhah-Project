@@ -15,7 +15,13 @@ class PricePackage extends Model
         'description',
         'icon',
         'price',
+        'features',
         'is_active',
+    ];
+
+    protected $casts = [
+        'features' => 'array',
+        'is_active' => 'boolean',
     ];
 
     /**
@@ -24,13 +30,5 @@ class PricePackage extends Model
     public function establishment()
     {
         return $this->belongsTo(Establishment::class);
-    }
-
-    /**
-     * Get the features for the price package.
-     */
-    public function features()
-    {
-        return $this->hasMany(PricePackageFeature::class);
     }
 }
