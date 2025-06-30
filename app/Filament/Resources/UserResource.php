@@ -127,7 +127,9 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            EstablishmentsRelationManager::make('establishments'),
+            EstablishmentsRelationManager::make([
+                'relationship' => 'establishments', // Pass the relationship name as a key-value pair in an array
+            ]),
         ];
     }
 
