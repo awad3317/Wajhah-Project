@@ -21,6 +21,8 @@ class EstablishmentTypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'الاعدادات'; 
+
     protected static ?string $navigationLabel = 'أنواع المنشآت';
 
     protected static ?string $pluralModelLabel = 'أنواع المنشآت';
