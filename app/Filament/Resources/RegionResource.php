@@ -40,7 +40,7 @@ class RegionResource extends Resource
                     ->relationship('parent', 'name', fn (Builder $query) => $query->whereNull('parent_id'))
                     ->nullable()
                     ->searchable() 
-                    ->placeholder('Select a parent region') 
+                    ->placeholder('اختر محافظة رئيسية (اختياري)')
                     ->label('أسم المحافظة'), 
             ]);
     }
