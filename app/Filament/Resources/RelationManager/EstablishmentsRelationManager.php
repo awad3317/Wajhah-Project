@@ -16,7 +16,7 @@ class EstablishmentsRelationManager extends RelationManager
     // هذا المتغير سيتم تعيينه من المورد الأب (UserResource أو RegionResource)
     protected static ?string $model =Establishment::class;
 
-    protected static ?string $relationship = null;
+    // protected static ?string $relationship = null;
 
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
