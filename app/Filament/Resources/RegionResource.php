@@ -37,8 +37,7 @@ class RegionResource extends Resource
                     ->label('أسم المنطقة'),
 
                 Forms\Components\Select::make('parent_id')
-                    ->relationship('parent', 'name') 
-                    ->modifyQueryUsing(fn (Builder $query) => $query->whereNull('parent_id'))
+                    ->relationship('parent', 'name', fn (Builder $query) => $query->whereNull('parent_id'))
                     ->nullable()
                     ->searchable() 
                     ->placeholder('Select a parent region') 
