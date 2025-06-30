@@ -127,9 +127,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            EstablishmentsRelationManager::make(
-                relationship: 'establishments' // اسم العلاقة في موديل User
-            ),
+            EstablishmentsRelationManager::make('establishments'),
         ];
     }
 
