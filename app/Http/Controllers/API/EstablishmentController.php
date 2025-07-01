@@ -97,9 +97,14 @@ class EstablishmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        try {
+            $establishment=$this->EstablishmentRepository->getById($id);
+            return ApiResponseClass::sendResponse($establishment,'establishment');
+        } catch (Exception $e) {
+            return ApiResponseClass::sendError('Error save establishment: ' . $e->getMessage());
+        }
     }
 
     /**

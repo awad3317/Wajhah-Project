@@ -50,7 +50,10 @@ Route::post('/forgetPassword', [ForgetPasswordController::class,'forgetPassword'
 Route::post('/resetPassword', [ForgetPasswordController::class,'resetPassword']);
 
 Route::get('/establishmentType', [EstablishmentTypeController::class, 'index']);
+
+    //       Establishment Route with out auth  //
 Route::get('/establishment', [EstablishmentController::class, 'index']);
+Route::get('/establishment/{id}', [EstablishmentController::class, 'show']);
 
 Route::get('/regions/parents', [RegionController::class,'getParents']);
 Route::get('/regions/{id}/children', [RegionController::class,'getChildren']);
