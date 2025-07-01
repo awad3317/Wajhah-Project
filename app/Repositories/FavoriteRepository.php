@@ -56,8 +56,8 @@ class FavoriteRepository implements RepositoriesInterface
     }
 
     public function grtByUserIdAndEstablishmentId($user_id,$establishment_id)  {
-        return Favorite::where('user_id', $userId)
-        ->where('establishment_id', $establishmentId)
+        return Favorite::where('user_id', $user_id)
+        ->where('establishment_id', $establishment_id)
         ->first();
     }
     
