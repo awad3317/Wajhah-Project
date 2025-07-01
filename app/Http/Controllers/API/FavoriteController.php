@@ -36,7 +36,7 @@ class FavoriteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function toggleFavorite(Request $request)
     {
        $fields=$request->validate([
             'establishment_id' => ['required',Rule::exists('establishments','id')],
