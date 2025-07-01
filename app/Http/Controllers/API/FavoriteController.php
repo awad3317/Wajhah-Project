@@ -43,8 +43,15 @@ class FavoriteController extends Controller
         ]);
         try {
             $fields['user_id'] = auth('sanctum')->user()->id; 
-            $favorite= $this->FavoriteRepository->store($fields);
-            return ApiResponseClass::sendResponse($favorite, 'Establishment Favorite saved successfully.');
+            $favorite = $this->FavoriteRepository->grtByUserIdAndEstablishmentId($fields['user_id'],$fields['establishment_id']);
+            if ($favorite) {
+                $favorite->delete();
+                $message = 'Establishment removed from favorites successfully.';
+            } else {
+                $favorite = $this->FavoriteRepository->store($fields);
+                $message = 'Establishment added to favorites successfully.';
+            }
+            return ApiResponseClass::sendResponse($favorite, $message);
         } catch (Exception $e) {
             return ApiResponseClass::sendError('Error saving favorite: ' . $e->getMessage());
         }

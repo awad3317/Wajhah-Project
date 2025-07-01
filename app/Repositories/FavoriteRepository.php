@@ -54,5 +54,11 @@ class FavoriteRepository implements RepositoriesInterface
     {
         return Favorite::where('id', $id)->delete() > 0;
     }
+
+    public function grtByUserIdAndEstablishmentId($user_id,$establishment_id)  {
+        return Favorite::where('user_id', $userId)
+        ->where('establishment_id', $establishmentId)
+        ->first();
+    }
     
 }
