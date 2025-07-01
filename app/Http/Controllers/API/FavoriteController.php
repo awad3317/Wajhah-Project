@@ -46,10 +46,10 @@ class FavoriteController extends Controller
             $favorite = $this->FavoriteRepository->grtByUserIdAndEstablishmentId($fields['user_id'],$fields['establishment_id']);
             if ($favorite) {
                 $favorite->delete();
-                $message = 'Establishment removed from favorites successfully.';
+                $message = 'Establishment favorite removed successfully.';
             } else {
                 $favorite = $this->FavoriteRepository->store($fields);
-                $message = 'Establishment added to favorites successfully.';
+                $message = 'Establishment favorite saved successfully.';
             }
             return ApiResponseClass::sendResponse($favorite, $message);
         } catch (Exception $e) {
