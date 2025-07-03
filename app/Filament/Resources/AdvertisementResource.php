@@ -66,7 +66,14 @@ class AdvertisementResource extends Resource
                 'xl' => 3,
                 '2xl' => 4,
             ])
-            
+            ->recordClasses(fn (Model $record) => match ($record->is_active) {
+                true => 'border-s-4 border-green-500 dark:border-green-300 rounded-lg shadow-md', // إذا كان نشطًا، حد أخضر
+                false => 'border-s-4 border-red-500 dark:border-red-300 rounded-lg shadow-md',   // إذا لم يكن نشطًا، حد أحمر
+            })
+            // إذا أردت أن تبدو كبطاقة حقيقية، أضف هذه الفئات أيضًا
+            // . ' rounded-lg shadow-md'
+            // إذا لم تكن الحدود تظهر بشكل جيد، قد تحتاج إلى تطبيق بعض الهوامش أو التبطين (padding)
+            // . ' p-4'
             ->columns([
                 Stack::make([
                     Tables\Columns\ImageColumn::make('image')
