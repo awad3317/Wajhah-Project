@@ -108,9 +108,9 @@ class AdvertisementResource extends Resource
                 ])
                 ->space(3)
                 ->alignCenter()
-                ->extraAttributes(function (Advertisement $record): array {
+                ->recordClasses(function (Advertisement $record): array {
     return [
-        'class' => ($record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'),
+        $record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500',
     ];
 }),
             ])
