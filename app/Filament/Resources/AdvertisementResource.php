@@ -60,12 +60,13 @@ class AdvertisementResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->heading('Clients')
            ->contentGrid([
                 'md' => 2,
                 'xl' => 3,
                 '2xl' => 4,
             ])
-            ->heading('Clients')
+            
             ->columns([
                 Stack::make([
                     Tables\Columns\ImageColumn::make('image')
