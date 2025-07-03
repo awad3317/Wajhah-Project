@@ -60,7 +60,7 @@ class AdvertisementResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultPaginationPageOption(4)
+            ->defaultPaginationPageOption(2)
            ->contentGrid([
                 'md' => 2,
                 'xl' => 3,
