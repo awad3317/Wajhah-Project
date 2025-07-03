@@ -70,8 +70,10 @@ class AdvertisementResource extends Resource
                     Tables\Columns\ImageColumn::make('image')
                         ->disk('public')
                         ->height(200)
+                        ->width('100%')
                         ->grow(false)
-                        ->alignCenter(),
+                        ->alignCenter()
+                        ->extraImgAttributes(['style' => 'object-fit: cover;']), 
                         
                     Tables\Columns\TextColumn::make('title')
                         ->weight('bold')
@@ -105,7 +107,8 @@ class AdvertisementResource extends Resource
                         ->label('الحالة'),
                 ])
                 ->space(3)
-                ->alignCenter(),
+                ->alignCenter()
+                ->extraAttributes(['class' => 'bg-white rounded-lg shadow overflow-hidden']),
             ])
             ->filters([
                 Tables\Filters\Filter::make('active')
