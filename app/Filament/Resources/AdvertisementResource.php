@@ -61,12 +61,6 @@ class AdvertisementResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->recordClasses(fn (Model $record) => match ($record->is_active) {
-            'draft' => 'opacity-30',
-            'reviewing' => 'border-s-2 border-orange-600 dark:border-orange-300',
-            'published' => 'border-s-2 border-green-600 dark:border-green-300',
-            default => null,
-        })
            ->contentGrid([
                 'md' => 2,
                 'xl' => 3,
@@ -122,6 +116,12 @@ class AdvertisementResource extends Resource
                 ])
                 ->space(3)
                 ->alignCenter()
+                ->recordClasses(fn (Model $record) => match ($record->is_active) {
+            'draft' => 'opacity-30',
+            'reviewing' => 'border-s-2 border-orange-600 dark:border-orange-300',
+            'published' => 'border-s-2 border-green-600 dark:border-green-300',
+            default => null,
+        })
             ])
             ->filters([
                 Tables\Filters\Filter::make('active')
