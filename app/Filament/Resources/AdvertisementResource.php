@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AdvertisementResource\Pages;
 use App\Filament\Resources\AdvertisementResource\RelationManagers;
 use Filament\Tables\Columns\Layout\Stack;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Advertisement;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -60,6 +61,12 @@ class AdvertisementResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        ->recordClasses(fn (Model $record) => match ($record->is_active) {
+            'draft' => 'opacity-30',
+            'reviewing' => 'border-s-2 border-orange-600 dark:border-orange-300',
+            'published' => 'border-s-2 border-green-600 dark:border-green-300',
+            default => null,
+        })
            ->contentGrid([
                 'md' => 2,
                 'xl' => 3,
