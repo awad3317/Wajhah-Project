@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AdvertisementResource extends Resource
 {
     protected static ?string $model = Advertisement::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-megaphone';
     protected static ?string $navigationLabel = 'الإعلانات';
     protected static ?string $pluralModelLabel = 'الإعلانات';
     protected static ?string $modelLabel = 'إعلان';
