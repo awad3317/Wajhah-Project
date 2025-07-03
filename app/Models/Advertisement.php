@@ -31,4 +31,12 @@ class Advertisement extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+
+    public function getImageAttribute($value)
+    {
+        if (request()->is('api/*')) {
+            return 'storage/'.$value;
+        }
+        return $value;
+    }
 }
