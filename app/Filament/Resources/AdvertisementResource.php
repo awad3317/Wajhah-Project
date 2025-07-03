@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Support\Enums\Alignment;
 
 class AdvertisementResource extends Resource
 {
@@ -66,53 +67,56 @@ class AdvertisementResource extends Resource
                 '2xl' => 4,
             ])
             ->columns([
-                Stack::make([
-                    Tables\Columns\ImageColumn::make('image')
-                        ->disk('public')
-                        ->height(200)
-                        ->width('100%')
-                        ->grow(false)
-                        ->alignCenter()
-                        ->extraImgAttributes(['style' => 'object-fit: cover;']), 
-                        
-                    Tables\Columns\TextColumn::make('title')
-                        ->weight('bold')
-                        ->searchable()
-                        ->alignCenter(),
-                        
-                    Tables\Columns\TextColumn::make('description')
-                        ->limit(100)
-                        ->color('gray')
-                        ->alignCenter()
-                        ->size('sm'),
-                        
+                \Filament\Tables\Columns\Layout\Panel::make([ // استخدم Panel هنا
                     Stack::make([
-                        Tables\Columns\TextColumn::make('start_date')
-                            ->dateTime('Y-m-d')
-                            ->size('xs')
+                        Tables\Columns\ImageColumn::make('image')
+                            ->disk('public')
+                            ->height(200)
+                            ->width('100%')
+                            ->grow(false)
+                            ->alignCenter()
+                            ->extraImgAttributes(['style' => 'object-fit: cover;']),
+
+                        Tables\Columns\TextColumn::make('title')
+                            ->weight('bold')
+                            ->searchable()
+                            ->alignCenter(),
+
+                        Tables\Columns\TextColumn::make('description')
+                            ->limit(100)
                             ->color('gray')
-                            ->label('تاريخ البدء'),
-                            
-                        Tables\Columns\TextColumn::make('end_date')
-                            ->dateTime('Y-m-d')
-                            ->size('xs')
-                            ->color('gray')
-                            ->label('تاريخ الانتهاء')
-                            ->placeholder('لا يوجد تاريخ انتهاء'),
-                    ])->space(1),
-                    
-                    Tables\Columns\IconColumn::make('is_active')
-                        ->boolean()
-                        ->alignCenter()
-                        ->label('الحالة'),
+                            ->alignCenter()
+                            ->size('sm'),
+
+                        Stack::make([
+                            Tables\Columns\TextColumn::make('start_date')
+                                ->dateTime('Y-m-d')
+                                ->size('xs')
+                                ->color('gray')
+                                ->label('تاريخ البدء'),
+
+                            Tables\Columns\TextColumn::make('end_date')
+                                ->dateTime('Y-m-d')
+                                ->size('xs')
+                                ->color('gray')
+                                ->label('تاريخ الانتهاء')
+                                ->placeholder('لا يوجد تاريخ انتهاء'),
+                        ])->space(1),
+
+                        Tables\Columns\IconColumn::make('is_active')
+                            ->boolean()
+                            ->alignCenter()
+                            ->label('الحالة'),
+                    ])
+                    ->space(3)
+                    ->alignCenter(),
                 ])
-                ->space(3)
-                ->alignCenter()
-                ->recordClasses(function (Advertisement $record): array {
-    return [
-        $record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500',
-    ];
-}),
+                ->extraAttributes(function (Advertisement $record): array {
+                    return [
+                        'class' => ($record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'),
+                    ];
+                })
+                ->alignment(Alignment::Center), // اختياري: ضبط محاذاة اللوحة
             ])
             ->filters([
                 Tables\Filters\Filter::make('active')
