@@ -91,13 +91,16 @@ class AdvertisementResource extends Resource
                             ->dateTime('Y-m-d')
                             ->size('xs')
                             ->color('gray')
-                            ->label('تاريخ البدء'),
+                            ->label('تاريخ البدء')
+                            ->prefix('البدء: '),
                             
                         Tables\Columns\TextColumn::make('end_date')
                             ->dateTime('Y-m-d')
                             ->size('xs')
                             ->color('gray')
                             ->label('تاريخ الانتهاء')
+                            ->placeholder('لا يوجد تاريخ انتهاء')
+                            ->prefix('الانتهاء: ')
                             ->placeholder('لا يوجد تاريخ انتهاء'),
                     ])->space(1),
                     
