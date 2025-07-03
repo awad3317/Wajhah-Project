@@ -60,7 +60,6 @@ class AdvertisementResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultPaginationPageOption(2)
            ->contentGrid([
                 'md' => 2,
                 'xl' => 3,
@@ -130,7 +129,8 @@ class AdvertisementResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ])
-            ->checkIfRecordIsSelectableUsing(fn () => false);
+            ->checkIfRecordIsSelectableUsing(fn () => false)
+            ->paginated(false);
     }
 
     public static function getPages(): array
