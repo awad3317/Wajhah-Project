@@ -78,14 +78,6 @@ class FavoriteController extends Controller
      */
     public function destroy(string $id)
     {
-        // try {
-        //     $Favorite= $this->FavoriteRepository->getById($id);
-        //     if($this->FavoriteRepository->delete($id)){
-        //         return ApiResponseClass::sendResponse( $Favorite, "{$Favorite->id} Establishment Favorite deleted successfully.");
-        //     }
-        //     return ApiResponseClass::sendError("Favorite with ID {$id} may not be found or not deleted. Try again.");
-        // } catch (Exception $e) {
-        //     return ApiResponseClass::sendError('Error deleting favorite: ' . $e->getMessage());
-        // }
+        //
     }
 }
