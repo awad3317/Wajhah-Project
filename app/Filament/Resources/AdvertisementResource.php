@@ -65,6 +65,7 @@ class AdvertisementResource extends Resource
                 'xl' => 3,
                 '2xl' => 4,
             ])
+            ->heading('Clients')
             ->columns([
                 Stack::make([
                     Tables\Columns\ImageColumn::make('image')
