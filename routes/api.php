@@ -10,6 +10,7 @@ use App\Http\Controllers\API\Auth\OtpController;
 use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\OwnerAccountController;
 use App\Http\Controllers\API\PricePackageController;
+use App\Http\Controllers\API\AdvertisementController;
 use App\Http\Controllers\API\Auth\UserAuthController;
 use App\Http\Controllers\API\EstablishmentController;
 use App\Http\Controllers\API\EstablishmentRuleController;
@@ -60,3 +61,7 @@ Route::get('/establishment/{id}', [EstablishmentController::class, 'show']);
 Route::get('/regions/parents', [RegionController::class,'getParents']);
 Route::get('/regions/{id}/children', [RegionController::class,'getChildren']);
 Route::get('/region',[RegionController::class,'index']);
+
+Route::get('/advertisement', [AdvertisementController::class,'index']);
+
+

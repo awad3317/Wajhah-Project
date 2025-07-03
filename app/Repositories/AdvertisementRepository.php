@@ -17,7 +17,7 @@ class AdvertisementRepository implements RepositoriesInterface
 
     public function index()
     {
-        return Advertisement::get();
+        return Advertisement::where('is_active','=',true)->get();
     }
 
     /**
