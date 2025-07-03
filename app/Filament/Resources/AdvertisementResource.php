@@ -107,8 +107,7 @@ class AdvertisementResource extends Resource
                         ->label('الحالة'),
                 ])
                 ->space(3)
-                ->alignCenter()
-                ->extraAttributes(['class' => 'bg-white rounded-lg shadow overflow-hidden']),
+                ->alignCenter(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('active')
