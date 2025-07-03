@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DvertisementResource\Pages;
-use App\Filament\Resources\DvertisementResource\RelationManagers;
+use App\Filament\Resources\AdvertisementResource\Pages;
+use App\Filament\Resources\AdvertisementResource\RelationManagers;
 use App\Models\Advertisement;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,14 +13,12 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class AdvertisementsResource extends Resource
+class AdvertisementResource extends Resource
 {
     protected static ?string $model = Advertisement::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationLabel = 'الإعلانات';
     protected static ?string $pluralModelLabel = 'الإعلانات';
-
     protected static ?string $modelLabel = 'إعلان';
 
     public static function form(Form $form): Form
@@ -103,7 +101,7 @@ class AdvertisementsResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageDvertisements::route('/'),
+            'index' => Pages\ManageAdvertisements::route('/'),
         ];
     }
 }
