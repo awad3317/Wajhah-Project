@@ -6,7 +6,6 @@ use App\Filament\Resources\AdvertisementResource\Pages;
 use App\Filament\Resources\AdvertisementResource\RelationManagers;
 use Filament\Tables\Columns\Layout\Stack;
 use App\Models\Advertisement;
-use Filament\Tables\Columns\Layout\Panel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -66,9 +65,8 @@ class AdvertisementResource extends Resource
                 'xl' => 3,
                 '2xl' => 4,
             ])
-            
             ->columns([
-                Panel::make([
+                Stack::make([
                     Tables\Columns\ImageColumn::make('image')
                         ->disk('public')
                         ->height(200)
