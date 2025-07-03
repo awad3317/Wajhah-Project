@@ -122,7 +122,8 @@ class AdvertisementResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->checkIfRecordIsSelectableUsing(fn () => false);
     }
 
     public static function getPages(): array
