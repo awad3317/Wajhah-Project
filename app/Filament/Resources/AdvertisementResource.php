@@ -112,7 +112,6 @@ class AdvertisementResource extends Resource
     return [
         'class' => 'rounded-lg shadow overflow-hidden p-4 ' . 
                   ($record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'),
-        'style' => 'background-color: white;'
     ];
 }),
             ])
