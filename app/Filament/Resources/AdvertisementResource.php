@@ -110,8 +110,7 @@ class AdvertisementResource extends Resource
                 ->alignCenter()
                 ->extraAttributes(function (Advertisement $record): array {
     return [
-        'class' => 'rounded-lg shadow overflow-hidden p-4 ' . 
-                  ($record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'),
+        'class' => ($record->is_active ? 'border-l-4 border-green-500' : 'border-l-4 border-red-500'),
     ];
 }),
             ])
