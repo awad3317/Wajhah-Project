@@ -92,7 +92,7 @@ class AdvertisementResource extends Resource
                             ->size('xs')
                             ->color('gray')
                             ->label('تاريخ البدء')
-                            ->prefix('البدء: '),
+                            ->formatStateUsing(fn ($state) => 'تاريخ البدء: ' . $state->format('Y-m-d')),
                             
                         Tables\Columns\TextColumn::make('end_date')
                             ->dateTime('Y-m-d')
@@ -100,8 +100,11 @@ class AdvertisementResource extends Resource
                             ->color('gray')
                             ->label('تاريخ الانتهاء')
                             ->placeholder('لا يوجد تاريخ انتهاء')
-                            ->prefix('الانتهاء: ')
-                            ->placeholder('لا يوجد تاريخ انتهاء'),
+                            ->formatStateUsing(function ($state) {
+            return $state 
+                ? 'تاريخ الانتهاء: ' . $state->format('Y-m-d')
+                : 'لا يوجد تاريخ انتهاء';
+        }),
                     ])->space(1),
                     
                     Tables\Columns\IconColumn::make('is_active')
