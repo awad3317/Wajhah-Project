@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AdvertisementResource\Pages;
 use App\Filament\Resources\AdvertisementResource\RelationManagers;
+use Filament\Tables\Columns\Layout\Stack;
 use App\Models\Advertisement;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -59,28 +60,52 @@ class AdvertisementResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+           ->contentGrid([
+                'md' => 2,
+                'xl' => 3,
+                '2xl' => 4,
+            ])
             ->columns([
-                Tables\Columns\ImageColumn::make('image')
-                    ->disk('public')
-                    ->label('الصورة'),
+                Stack::make([
+                    Tables\Columns\ImageColumn::make('image')
+                        ->disk('public')
+                        ->height(200)
+                        ->grow(false)
+                        ->alignCenter(),
+                        
+                    Tables\Columns\TextColumn::make('title')
+                        ->weight('bold')
+                        ->searchable()
+                        ->alignCenter(),
+                        
+                    Tables\Columns\TextColumn::make('description')
+                        ->limit(100)
+                        ->color('gray')
+                        ->alignCenter()
+                        ->size('sm'),
+                        
+                    Stack::make([
+                        Tables\Columns\TextColumn::make('start_date')
+                            ->dateTime('Y-m-d')
+                            ->size('xs')
+                            ->color('gray')
+                            ->label('تاريخ البدء'),
+                            
+                        Tables\Columns\TextColumn::make('end_date')
+                            ->dateTime('Y-m-d')
+                            ->size('xs')
+                            ->color('gray')
+                            ->label('تاريخ الانتهاء')
+                            ->placeholder('لا يوجد تاريخ انتهاء'),
+                    ])->space(1),
                     
-                Tables\Columns\TextColumn::make('title')
-                    ->searchable()
-                    ->label('العنوان'),
-                    
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean()
-                    ->label('الحالة'),
-                    
-                Tables\Columns\TextColumn::make('start_date')
-                    ->dateTime()
-                    ->sortable()
-                    ->label('تاريخ البدء'),
-                    
-                Tables\Columns\TextColumn::make('end_date')
-                    ->dateTime()
-                    ->sortable()
-                    ->label('تاريخ الانتهاء'),
+                    Tables\Columns\IconColumn::make('is_active')
+                        ->boolean()
+                        ->alignCenter()
+                        ->label('الحالة'),
+                ])
+                ->space(3)
+                ->alignCenter(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('active')
