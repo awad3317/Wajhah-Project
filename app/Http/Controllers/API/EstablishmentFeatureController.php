@@ -41,6 +41,7 @@ class EstablishmentFeatureController extends Controller
         $fields = $request->validate([
             'establishment_id' => ['required',Rule::exists('establishments','id')],
             'name' => ['required','string','max:255'],
+            'description'=>['nullable','string','max:1000','min:2'],
             'icon' => ['required','string','max:255'],
         ]);
         try {
@@ -51,6 +52,7 @@ class EstablishmentFeatureController extends Controller
             }
             $feature = $establishment->features()->create([
             'name' => $fields['name'],
+            'description'=>$fields['description'] ?? null,
             'icon' => $fields['icon']
         ]);
             return ApiResponseClass::sendResponse($feature, 'Establishment feature saved successfully.');

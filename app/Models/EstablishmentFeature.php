@@ -12,6 +12,7 @@ class EstablishmentFeature extends Model
     protected $fillable = [
         'establishment_id',
         'name',
+        'description',
         'icon'
     ];
 
