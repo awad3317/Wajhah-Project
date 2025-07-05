@@ -53,6 +53,13 @@ class EstablishmentController extends Controller
         'features.*.icon' => ['required', 'string', 'max:255'],
         'rules' => ['nullable', 'array'],
         'rules.*' => ['string', 'max:1000'],
+        'price_packages' => ['required', 'array', 'min:1'],
+        'price_packages.*.name' => ['required', 'string', 'max:100'],
+        'price_packages.*.description' => ['nullable', 'string', 'max:1000'],
+        'price_packages.*.icon' => ['required', 'string', 'max:255'],
+        'price_packages.*.price' => ['required', 'numeric', 'min:0'],
+        'price_packages.*.features' => ['nullable', 'array'],
+        'price_packages.*.features.*' => ['required', 'string', 'max:100'],
     ]);
     try {
         $user = auth('sanctum')->user();
@@ -79,6 +86,17 @@ class EstablishmentController extends Controller
         if (!empty($fields['rules'])) {
             foreach ($fields['rules'] as $rule) {
                 $establishment->rules()->create(['rule' => $rule]);
+            }
+        }
+        if (!empty($fields['price_packages'])) {
+            foreach ($fields['price_packages'] as $package) {
+                $establishment->pricePackages()->create([
+                    'name' => $package['name'],
+                    'description' => $package['description'] ?? null,
+                    'icon' => $package['icon'],
+                    'price' => $package['price'],
+                    'features' => !empty($package['features']) ? json_encode($package['features']) : null,
+                ]);
             }
         }
         $establishment->load(['images', 'features', 'rules', 'type', 'region', 'owner']);
