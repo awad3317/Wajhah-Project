@@ -69,14 +69,46 @@ class PricePackageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $fields = $request->validate([
+            'name' => ['sometimes', 'string', 'max:100'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'icon' => ['sometimes', 'string', 'max:255'],
+            'price' => ['sometimes', 'numeric', 'min:0'],
+            'features' => ['nullable', 'array'],
+            'features.*' => ['required_with:features', 'string', 'max:100'],
+        ]);
+        try {
+            $userId = auth('sanctum')->id();
+            $package = $this->PricePackageRepository->getById($id);
+            $establishment = $package->establishment;
+            if (!$establishment || $establishment->owner_id !== $userId) {
+            return ApiResponseClass::sendError('Unauthorized. You are not authorized to update this price package.', [], 403);
+        }
+            $updatedPackage = $this->PricePackageRepository->update($fields, $id);
+            return ApiResponseClass::sendResponse($updatedPackage, 'Price package updated successfully.');
+        } catch (Exception $e) {
+            return ApiResponseClass::sendError('Error updating package: ' . $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
+    { 
+        try {
+            $userId = auth('sanctum')->id();
+            $package=$this->PricePackageRepository->getById($id);
+            $establishment = $package->establishment;
+            if (!$establishment || $establishment->owner_id !== $userId) {
+                return ApiResponseClass::sendError('Unauthorized. You are not authorized to delete this price package.', [], 403);
+            }
+            if($this->PricePackageRepository->delete($id)){
+                return ApiResponseClass::sendResponse($package, "{$package->id} unsaved successfully.");
+            }
+            return ApiResponseClass::sendError("Package with ID {$id} may not be found or not deleted. Try again.");
+        } catch (Exception $e) {
+            return ApiResponseClass::sendError('Error deleting package: ' . $e->getMessage());
+        }
     }
 }

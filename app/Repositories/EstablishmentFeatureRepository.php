@@ -33,6 +33,9 @@ class EstablishmentFeatureRepository implements RepositoriesInterface
      */
     public function store(array $data): EstablishmentFeature
     {
+        if (isset($data['features'])) {
+            $data['features'] = json_encode($data['features']);
+        }
         return EstablishmentFeature::create($data);
     }
 
@@ -41,6 +44,9 @@ class EstablishmentFeatureRepository implements RepositoriesInterface
      */
     public function update(array $data, $id): EstablishmentFeature
     {
+        if (isset($data['features'])) {
+            $data['features'] = json_encode($data['features']);
+        }
         $EstablishmentFeature = EstablishmentFeature::findOrFail($id);
         $EstablishmentFeature->update($data);
         return $EstablishmentFeature;

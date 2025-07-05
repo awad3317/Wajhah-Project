@@ -29,7 +29,7 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
     Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
     Route::apiResource('/establishmentRule', EstablishmentRuleController::class)->except(['index','show']);
-    Route::apiResource('/pricePackage', PricePackageController::class)->except(['index','show','update']);
+    Route::apiResource('/pricePackage', PricePackageController::class)->except(['index','show']);
     // Route::apiResource('/review', ReviewController::class)->except(['index','show']);
 
     //           Review Route        //

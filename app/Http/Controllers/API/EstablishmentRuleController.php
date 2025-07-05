@@ -84,13 +84,15 @@ class EstablishmentRuleController extends Controller
      */
     public function destroy(string $id)
     {
-        if($id != auth('sanctum')->id()){
-            return ApiResponseClass::sendError('You are not authorized to deleting this rule.', [], 403);
-        }
         try {
-            $account=$this->EstablishmentRuleRepository->getById($id);
+            $user = auth('sanctum')->user();
+            $rule=$this->EstablishmentRuleRepository->getById($id);
+            $establishment=$rule->establishment;
+            if ($establishment->owner_id != $user->id) {
+                return ApiResponseClass::sendError('Only the owner of the establishment can delete rule.', null, 403);
+            }
             if($this->EstablishmentRuleRepository->delete($id)){
-                return ApiResponseClass::sendResponse($account, "{$account->id} unsaved successfully.");
+                return ApiResponseClass::sendResponse($rule, "{$rule->id} unsaved successfully.");
             }
             return ApiResponseClass::sendError("Rule with ID {$id} may not be found or not deleted. Try again.");
         } catch (Exception $e) {
