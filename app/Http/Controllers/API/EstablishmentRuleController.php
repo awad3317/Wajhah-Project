@@ -63,18 +63,17 @@ class EstablishmentRuleController extends Controller
     public function update(Request $request, string $id)
     {
         $fields = $request->validate([
+            'establishment_id' => ['required',Rule::exists('establishments','id')],
             'rule' => ['required','string'],
         ]);
         try {
             $user = auth('sanctum')->user();
-            $rule = $this->EstablishmentRuleRepository->getById($id);
-            $establishment = $rule->establishment;
             $establishment= $this->EstablishmentRepository->getById($fields['establishment_id']);
             if ($establishment->owner_id != $user->id) {
-            return ApiResponseClass::sendError('Only the owner of the establishment can update rule.', null, 403);
-        }
-            $updatedRule = $this->EstablishmentRuleRepository->update($fields ,$id);
-             return ApiResponseClass::sendResponse($updatedRule, 'Establishment rule updated successfully.');
+                return ApiResponseClass::sendError('Only the owner of the establishment can update rule.', null, 403);
+            }
+            $rule = $this->EstablishmentRuleRepository->update($fields,$id);
+            return ApiResponseClass::sendResponse($rule, 'Establishment rule updated successfully.');
         } catch (Exception $e) {
             return ApiResponseClass::sendError('Error updating establishment rule: ' . $e->getMessage());
         }
