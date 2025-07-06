@@ -48,7 +48,7 @@ class EstablishmentRepository implements RepositoriesInterface
      */
     public function getById($id): Establishment
     {
-        return Establishment::with(['region.parent','images','features','rules','pricePackages'])->withAvg('reviews', 'rating')->findOrFail($id);
+        return Establishment::with(['region.parent','images','features','rules','pricePackages','specifications'])->withAvg('reviews', 'rating')->findOrFail($id);
     }
 
     /**

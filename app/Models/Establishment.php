@@ -93,4 +93,9 @@ class Establishment extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function specifications()
+    {
+        return $this->hasMany(EstablishmentSpecification::class);
+    }
 }

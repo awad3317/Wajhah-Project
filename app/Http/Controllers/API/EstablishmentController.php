@@ -60,6 +60,9 @@ class EstablishmentController extends Controller
         'price_packages.*.price' => ['required', 'numeric', 'min:0'],
         'price_packages.*.features' => ['nullable', 'array'],
         'price_packages.*.features.*' => ['required', 'string', 'max:100'],
+        'specifications' => ['nullable', 'array'],
+        'specifications.*.name' => ['required_with:specifications', 'string', 'max:100'],
+        'specifications.*.icon' => ['required_with:specifications', 'string', 'max:255'],
     ]);
     try {
         $user = auth('sanctum')->user();
@@ -99,7 +102,15 @@ class EstablishmentController extends Controller
                 ]);
             }
         }
-        $establishment->load(['images', 'features', 'rules', 'type', 'region', 'owner']);
+        if (!empty($fields['specifications'])) {
+            foreach ($fields['specifications'] as $specification) {
+                $establishment->specifications()->create([
+                    'name' => $specification['name'],
+                    'icon' => $specification['icon'],
+                ]);
+            }
+        }
+        $establishment->load(['images', 'features', 'rules','specifications', 'type', 'region', 'owner']);
         return ApiResponseClass::sendResponse([
             'establishment' => $establishment,
             'images' => $establishment->images,
