@@ -21,7 +21,7 @@ class EstablishmentImage extends Model
     }
 
     //  Accessor for full image URL
-    public function getImageUrlAttribute()
+    public function getImageAttribute()
     {
         return asset('storage/' . $this->image);
     }
