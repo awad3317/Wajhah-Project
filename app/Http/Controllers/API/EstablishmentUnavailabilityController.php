@@ -71,6 +71,19 @@ class EstablishmentUnavailabilityController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $user = auth('sanctum')->user();
+            $unavailable_date=$this->EstablishmentUnavailabilityRepository->getById($id);
+            $establishment=$unavailable_date->establishment;
+            if ($establishment->owner_id != $user->id) {
+                return ApiResponseClass::sendError('Only the owner of the establishment can delete unavailable date.', null, 403);
+            }
+            if($this->EstablishmentUnavailabilityRepository->delete($id)){
+                return ApiResponseClass::sendResponse($unavailable_date, "{$unavailable_date->id} unsaved successfully.");
+            }
+            return ApiResponseClass::sendError("unavailable date with ID {$id} may not be found or not deleted. Try again.");
+        } catch (Exception $e) {
+            return ApiResponseClass::sendError('Error deleting unavailable date: ' . $e->getMessage());
+        }
     }
 }
