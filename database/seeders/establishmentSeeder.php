@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Establishment;
+use Illuminate\Database\Seeder;
+use App\Models\EstablishmentImage;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class establishmentSeeder extends Seeder
 {
@@ -26,6 +27,12 @@ class establishmentSeeder extends Seeder
                 'longitude' =>49.1257 ,
                 'is_verified' => true, 
                 'is_active' => true,
+                'images' => [
+                    'establishment-image/b68aa11a2ee6e800a9c68cd006456cb871d75df4.jpg',
+                    'establishment-image/b68aa11a2ee6e800a9c68cd006456cb871d75df4.jpg',
+                    'establishment-image/b68aa11a2ee6e800a9c68cd006456cb871d75df4.jpg',
+                    'establishment-image/b68aa11a2ee6e800a9c68cd006456cb871d75df4.jpg'
+                ]
             ],
             [
                 'owner_id' => 2,
@@ -225,7 +232,15 @@ class establishmentSeeder extends Seeder
             
         ];
         foreach ($Establishments as $Establishment) {
-            Establishment::create($Establishment);
+            $images = $establishmentData['images'] ?? [];
+            unset($establishmentData['images']);
+           $establishment= Establishment::create($Establishment);
+             foreach ($images as $image) {
+                EstablishmentImage::create([
+                    'establishment_id' => $establishment->id,
+                    'image' => $image
+                ]);
+            }
         }
     }
 }

@@ -20,9 +20,9 @@ class EstablishmentImage extends Model
         return $this->belongsTo(Establishment::class);
     }
 
-     // Accessor for full image URL
-    // public function getImageUrlAttribute()
-    // {
-    //     return asset('storage/' . $this->image);
-    // }
+    //  Accessor for full image URL
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/' . $this->image);
+    }
 }
