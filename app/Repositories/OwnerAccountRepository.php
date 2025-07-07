@@ -17,12 +17,10 @@ class OwnerAccountRepository implements RepositoriesInterface
 
     /**
      * Retrieve all OwnerAccounts with pagination.
-     *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function index(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    public function index()
     {
-        return OwnerAccount::paginate(10);
+        return OwnerAccount::where('owner_id','=',auth( 'sanctum')->id())->get();
     }
 
     /**

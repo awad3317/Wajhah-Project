@@ -24,7 +24,12 @@ class OwnerAccountController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $Accounts = $this->OwnerAccountRepository->index();
+            return ApiResponseClass::sendResponse($Accounts, 'All accounts retrieved successfully.');
+        } catch (Exception $e) {
+            return ApiResponseClass::sendError('Error retrieving accounts: ' . $e->getMessage());
+        } 
     }
 
     /**
@@ -40,7 +45,7 @@ class OwnerAccountController extends Controller
             'account_number'=>['required','string','min:7','max:15'],
         ]);
         try {
-            $fields['owner_id'] = auth('sanctum')->id();
+            $fields['owner_id'] = auth( 'sanctum')->id();
             $account = $this->OwnerAccountRepository->store($fields);
             return ApiResponseClass::sendResponse($account, 'account saved successfully.');
         } catch (Exception $e) {
