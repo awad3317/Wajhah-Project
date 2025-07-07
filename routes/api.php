@@ -26,7 +26,7 @@ Route::get('/user', function (Request $request) {
 Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::put('/user/{id}', [UserController::class, 'update']);
     Route::get('/bank', [BankController::class, 'index']);
-    Route::apiResource('/acount', OwnerAccountController::class)->except(['index','show']);
+    Route::apiResource('/acount', OwnerAccountController::class)->except(['show']);
     Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
     Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
     Route::apiResource('/establishmentRule', EstablishmentRuleController::class)->except(['index','show']);
