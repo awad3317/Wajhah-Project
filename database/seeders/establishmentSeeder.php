@@ -231,10 +231,10 @@ class establishmentSeeder extends Seeder
             ],
             
         ];
-        foreach ($Establishments as $Establishment) {
+        foreach ($Establishments as $establishmentData) {
             $images = $establishmentData['images'] ?? [];
             unset($establishmentData['images']);
-           $establishment= Establishment::create($Establishment);
+           $establishment= Establishment::create($establishmentData);
              foreach ($images as $image) {
                 EstablishmentImage::create([
                     'establishment_id' => $establishment->id,
