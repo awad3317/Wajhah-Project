@@ -36,5 +36,21 @@ class UserSeeder extends Seeder
             'phone_verified_at'=>now(),
             'user_type' => 'user',
         ]);
+
+        User::create( [
+            'name' => 'مها',
+            'phone' => '967783326477',
+            'password' => '123',
+            'phone_verified_at'=>now(),
+            'user_type' => 'user',
+        ]);
+
+        User::create( [
+            'name' => 'هبه',
+            'phone' => '967777245243',
+            'password' => '123',
+            'phone_verified_at'=>now(),
+            'user_type' => 'user',
+        ]);
     }
 }
