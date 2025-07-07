@@ -27,7 +27,7 @@ class EstablishmentRepository implements RepositoriesInterface
                     $q->select('id', 'name');
                 }
             ])
-            ->withAvg('reviews', 'rating');
+            ->withAvg('reviews', 'rating')->where('is_verified','=',true);
 
         $region_id = $request->query('region_id');
         if ($region_id) {
