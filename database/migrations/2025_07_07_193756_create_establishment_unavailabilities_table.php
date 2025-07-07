@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('unavailable_date');
             $table->timestamps();
             
-            $table->unique(['establishment_id', 'unavailable_date']);
+            $table->unique(['establishment_id', 'unavailable_date'], 'est_unavail_unique');
             
         });
     }
