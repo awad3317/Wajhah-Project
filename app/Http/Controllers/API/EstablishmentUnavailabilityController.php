@@ -43,7 +43,7 @@ class EstablishmentUnavailabilityController extends Controller
             if ($establishment->owner_id != $user->id) {
                 return ApiResponseClass::sendError('Only the owner of the establishment can add unavailable date. ', null, 403);
             }
-            $unavailable_date = $establishment->unavailabilityDays->create(['unavailable_date'=>$fields['unavailable_date']]);
+            $unavailable_date = $this->EstablishmentUnavailabilityRepository->store($fields);
             return ApiResponseClass::sendResponse($unavailable_date, 'Establishment unavailable date saved successfully.');
         } catch (Exception $e) {
             return ApiResponseClass::sendError('Error saving establishment unavailable date: ' . $e->getMessage());
