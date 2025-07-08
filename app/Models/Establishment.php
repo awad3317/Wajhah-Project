@@ -103,4 +103,21 @@ class Establishment extends Model
     {
         return $this->hasMany(EstablishmentUnavailability::class);
     }
+
+    /**
+    * Get the bookings for the establishment.
+    */
+    public function bookings()
+    {
+        return $this->hasMany(booking::class);
+    }
+
+    /**
+    * Get the active bookings for the establishment.
+    */
+    public function activeBookings()
+    {
+        return $this->hasMany(booking::class)
+                ->whereNotIn('status', ['cancelled', 'completed']);
+    }
 }

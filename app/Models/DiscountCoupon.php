@@ -51,4 +51,9 @@ class DiscountCoupon extends Model
     {
         return $this->hasMany(CouponUse::class, 'coupon_id');
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(booking::class);
+    }
 }

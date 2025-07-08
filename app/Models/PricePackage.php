@@ -31,4 +31,9 @@ class PricePackage extends Model
     {
         return $this->belongsTo(Establishment::class);
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(booking::class);
+    }
 }
