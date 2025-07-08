@@ -6,8 +6,10 @@ use App\Http\Controllers\API\BankController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RegionController;
 use App\Http\Controllers\API\ReviewController;
+use App\Http\Controllers\API\BookingController;
 use App\Http\Controllers\API\Auth\OtpController;
 use App\Http\Controllers\API\FavoriteController;
+use App\Http\Controllers\API\NotificationController;
 use App\Http\Controllers\API\OwnerAccountController;
 use App\Http\Controllers\API\PricePackageController;
 use App\Http\Controllers\API\AdvertisementController;
@@ -33,6 +35,9 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::apiResource('/pricePackage', PricePackageController::class)->except(['index','show']);
     // Route::apiResource('/review', ReviewController::class)->except(['index','show']);
     Route::apiResource('/unavailabilityDays', EstablishmentUnavailabilityController::class)->except(['index','show','update']);
+    Route::apiResource('/booking', BookingController::class)->except([]);
+    Route::get('/notifications',[NotificationController::class,'index']);
+    
     
 
     //           Review Route        //
