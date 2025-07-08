@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         User::create( [
             'name' => 'مها',
             'phone' => '967783326477',
-            'password' => '123',
+            'password' => '12345678',
             'phone_verified_at'=>now(),
             'user_type' => 'user',
         ]);
@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
         User::create( [
             'name' => 'هبه',
             'phone' => '967777245243',
-            'password' => '123',
+            'password' => '12345678',
             'phone_verified_at'=>now(),
             'user_type' => 'user',
         ]);
