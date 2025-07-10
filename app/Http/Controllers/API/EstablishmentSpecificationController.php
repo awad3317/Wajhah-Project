@@ -45,7 +45,7 @@ class EstablishmentSpecificationController extends Controller
                 return ApiResponseClass::sendError('Only the owner of the establishment can add specification. ', null, 403);
             }
             $specification = $this->EstablishmentSpecificationRepository->store($fields);
-            return ApiResponseClass::sendResponse($rule, 'Establishment specification saved successfully.');
+            return ApiResponseClass::sendResponse($specification, 'Establishment specification saved successfully.');
         } catch (Exception $e) {
             return ApiResponseClass::sendError('Error saving establishment specification: ' . $e->getMessage());
         }
