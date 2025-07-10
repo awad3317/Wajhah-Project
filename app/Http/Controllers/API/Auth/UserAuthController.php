@@ -74,5 +74,12 @@ class UserAuthController extends Controller
         
     }
 
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return ApiResponseClass::sendResponse(null, 'User logged out successfully');
+    }
+
    
 }

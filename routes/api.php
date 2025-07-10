@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     //          Favorite Route       //
     Route::post('/favorite/toggle',[FavoriteController::class,'toggleFavorite']);
     Route::get('/favorite',[FavoriteController::class,'index']);
+
+    Route::post('/logout',[UserAuthController::class,'logout']);
 });
 
     //           Auth Route          //
