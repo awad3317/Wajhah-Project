@@ -44,7 +44,7 @@ class EstablishmentSpecificationController extends Controller
             if ($establishment->owner_id != $user->id) {
                 return ApiResponseClass::sendError('Only the owner of the establishment can add specification. ', null, 403);
             }
-            $specification = $establishment->specifications->create(['rule'=>$fields['rule'],'icon'=>$fields['icon']]);
+            $specification = $establishment->specifications->create(['name'=>$fields['name'],'icon'=>$fields['icon']]);
              return ApiResponseClass::sendResponse($rule, 'Establishment specification saved successfully.');
         } catch (Exception $e) {
             return ApiResponseClass::sendError('Error saving establishment specification: ' . $e->getMessage());
