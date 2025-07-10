@@ -20,6 +20,8 @@ use App\Http\Controllers\API\EstablishmentTypeController;
 use App\Http\Controllers\API\Auth\ForgetPasswordController;
 use App\Http\Controllers\API\EstablishmentFeatureController;
 use App\Http\Controllers\API\EstablishmentUnavailabilityController;
+use App\Http\Controllers\API\EstablishmentSpecificationController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -32,6 +34,7 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     Route::apiResource('/establishment', EstablishmentController::class)->except(['index','show']);
     Route::apiResource('/establishmentFeature', EstablishmentFeatureController::class)->except(['index','show']);
     Route::apiResource('/establishmentRule', EstablishmentRuleController::class)->except(['index','show']);
+    Route::apiResource('/establishmentSpecification', EstablishmentSpecificationController::class)->except(['index','show']);
     Route::apiResource('/pricePackage', PricePackageController::class)->except(['index','show']);
     // Route::apiResource('/review', ReviewController::class)->except(['index','show']);
     Route::apiResource('/unavailabilityDays', EstablishmentUnavailabilityController::class)->except(['index','show','update']);
