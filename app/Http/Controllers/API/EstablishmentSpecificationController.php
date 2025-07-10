@@ -35,8 +35,8 @@ class EstablishmentSpecificationController extends Controller
     {
         $fields = $request->validate([
             'establishment_id' => ['required',Rule::exists('establishments','id')],
-            'name' => ['required','string'],
-            'icon'=>['required','string']
+            'name' => ['required','string','max:100'],
+            'icon'=>['required','string','max:100']
         ]);
         try {
             $user = auth('sanctum')->user();
