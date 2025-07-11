@@ -70,7 +70,7 @@ class EstablishmentController extends Controller
             return ApiResponseClass::sendError('Only users with owner type can create establishments',null,403);
         }
         $fields['owner_id'] = $user->id;
-        $fields['primary_image'] = $this->ImageService->saveImage($fields['primary_image'], 'establishments');
+        $fields['primary_image'] = $this->ImageService->saveImage($fields['primary_image'], 'establishment-image');
         $establishment = $this->EstablishmentRepository->store($fields);
         
         if ($request->hasFile('images')){
