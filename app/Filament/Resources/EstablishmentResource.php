@@ -46,7 +46,7 @@ class EstablishmentResource extends Resource
             Stack::make([
                 Tables\Columns\ImageColumn::make('primary_image')
                     ->disk('public')
-                    ->height(200)
+                    ->height(150)
                     ->width('100%')
                     ->grow(false)
                     ->alignCenter(),
