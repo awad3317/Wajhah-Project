@@ -6,6 +6,9 @@ use App\Filament\Resources\EstablishmentResource\Pages;
 use App\Filament\Resources\EstablishmentResource\RelationManagers;
 use App\Models\Establishment;
 use Filament\Forms;
+use Filament\Support\Enums\FontWeight;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -31,64 +34,74 @@ class EstablishmentResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
+   public static function table(Table $table): Table
+{
+    return $table
+        ->contentGrid([
+            'md' => 2,
+            'xl' => 3,
+            '2xl' => 4,
+        ])
+        ->columns([
+            Stack::make([
                 Tables\Columns\ImageColumn::make('primary_image')
-                    ->label('الصورة')
-                    ->circular(),
+                    ->disk('public')
+                    ->width(80)
+                    ->height(80)
+                    ->grow(false)
+                    ->alignCenter(),
+                
                 Tables\Columns\TextColumn::make('name')
-                    ->label('الاسم')
-                    ->searchable(),
+                    ->weight(FontWeight::Bold)
+                    ->searchable()
+                    ->alignCenter(),
+                
                 Tables\Columns\TextColumn::make('type.name')
                     ->label('النوع')
-                    ->sortable(),
+                    ->color('gray')
+                    ->alignCenter()
+                    ->size('sm'),
+                
                 Tables\Columns\TextColumn::make('region.name')
                     ->label('المنطقة')
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_verified')
-                    ->label('موثق')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label('نشط')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('تاريخ الإنشاء')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->label('تاريخ التحديث')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->color('gray')
+                    ->alignCenter()
+                    ->size('sm'),
+                
+                BadgeColumn::make('is_verified')
+                    ->label('الحالة')
+                    ->color(fn (string $state): string => match ($state) {
+                        '1' => 'success',
+                        '0' => 'danger',
+                    })
+                    ->formatStateUsing(fn (string $state): string => $state ? 'موثق' : 'غير موثق')
+                    ->alignCenter(),
             ])
-            ->filters([
-                Tables\Filters\SelectFilter::make('type')
-                    ->label('النوع')
-                    ->relationship('type', 'name'),
-                Tables\Filters\SelectFilter::make('region')
-                    ->label('المنطقة')
-                    ->relationship('region', 'name'),
-                Tables\Filters\Filter::make('verified')
-                    ->label('الموثقين فقط')
-                    ->query(fn (Builder $query): Builder => $query->where('is_verified', true)),
-                Tables\Filters\Filter::make('active')
-                    ->label('النشطين فقط')
-                    ->query(fn (Builder $query): Builder => $query->where('is_active', true)),
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
-
+            ->space(3)
+            ->alignCenter(),
+        ])
+        ->filters([
+            Tables\Filters\SelectFilter::make('type')
+                ->label('النوع')
+                ->relationship('type', 'name'),
+            Tables\Filters\SelectFilter::make('region')
+                ->label('المنطقة')
+                ->relationship('region', 'name'),
+            Tables\Filters\Filter::make('verified')
+                ->label('الموثقين فقط')
+                ->query(fn (Builder $query): Builder => $query->where('is_verified', true)),
+        ])
+        ->actions([
+            Tables\Actions\ViewAction::make()->iconButton(),
+            Tables\Actions\EditAction::make()->iconButton(),
+            Tables\Actions\DeleteAction::make()->iconButton(),
+        ])
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]),
+        ]);
+}
     public static function getRelations(): array
     {
         return [
