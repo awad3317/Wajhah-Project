@@ -122,6 +122,7 @@ class EstablishmentResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]),
         ])
+        ->headerActions([])
         ->checkIfRecordIsSelectableUsing(fn () => false);
 }
     public static function getRelations(): array
