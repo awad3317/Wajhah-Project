@@ -103,7 +103,7 @@ class EstablishmentResource extends Resource
                 }),
             
             Tables\Actions\ViewAction::make()->iconButton(),
-            Tables\Actions\EditAction::make()->iconButton(),
+            // Tables\Actions\EditAction::make()->iconButton(),
             Tables\Actions\DeleteAction::make()->iconButton(),
         ])
         ->filters([
