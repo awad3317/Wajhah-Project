@@ -75,7 +75,7 @@ class EstablishmentResource extends Resource
                     ->formatStateUsing(fn (string $state): string => $state ? 'موثق' : 'غير موثق')
                     ->alignCenter(),
             ])
-            // ->space(3)
+            ->space(3)
             ->alignCenter(),
         ])
         ->actions([
@@ -100,9 +100,7 @@ class EstablishmentResource extends Resource
                             ->success()
                             ->send();
                     }),
-            ])
-            ->space(3)
-            ->alignCenter(),
+            ]),
         ])
         ->filters([
             Tables\Filters\SelectFilter::make('type')
