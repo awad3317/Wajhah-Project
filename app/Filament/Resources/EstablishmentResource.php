@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\EstablishmentResource\Pages;
 use App\Filament\Resources\EstablishmentResource\RelationManagers;
 use App\Models\Establishment;
+use Filament\Notifications\Notification;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables\Columns\Layout\Stack;
@@ -69,13 +71,36 @@ class EstablishmentResource extends Resource
                     ->size('sm'),
                 
                 BadgeColumn::make('is_verified')
-                    ->label('الحالة')
-                    ->color(fn (string $state): string => match ($state) {
-                        '1' => 'success',
-                        '0' => 'danger',
-                    })
+                    ->label('حالة التوثيق')
+                    ->color(fn (string $state): string => $state ? 'success' : 'danger')
                     ->formatStateUsing(fn (string $state): string => $state ? 'موثق' : 'غير موثق')
                     ->alignCenter(),
+            ])
+            ->space(3)
+            ->alignCenter(),
+        ])
+        ->actions([
+            // إضافة Action لتغيير الحالة
+            ActionGroup::make([
+                Tables\Actions\Action::make('changeVerification')
+                    ->label('تغيير حالة التوثيق')
+                    ->form([
+                        Forms\Components\Select::make('verification_status')
+                            ->label('حالة التوثيق')
+                            ->options([
+                                '1' => 'موثق',
+                                '0' => 'غير موثق',
+                            ])
+                            ->required()
+                            ->default(fn (Establishment $record) => $record->is_verified)
+                    ])
+                    ->action(function (Establishment $record, array $data) {
+                        $record->update(['is_verified' => $data['verification_status']]);
+                        Notification::make()
+                            ->title('تم تحديث حالة التوثيق بنجاح')
+                            ->success()
+                            ->send();
+                    }),
             ])
             ->space(3)
             ->alignCenter(),
