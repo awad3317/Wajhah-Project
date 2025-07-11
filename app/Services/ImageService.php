@@ -22,7 +22,7 @@ class ImageService
 
         $image->storeAs($folder, $filename, 'public');
        
-        return 'storage/' . $filePath;
+        return $filePath;
     }
 
     public function deleteImage(?string $imagePath): bool
