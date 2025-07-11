@@ -75,7 +75,7 @@ class EstablishmentResource extends Resource
                     ->formatStateUsing(fn (string $state): string => $state ? 'موثق' : 'غير موثق')
                     ->alignCenter(),
             ])
-            ->space(3)
+            // ->space(3)
             ->alignCenter(),
         ])
         ->actions([
