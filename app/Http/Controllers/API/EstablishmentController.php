@@ -75,7 +75,7 @@ class EstablishmentController extends Controller
         
         if ($request->hasFile('images')){
             foreach ($request->file('images') as $image){
-                $imagePath = $this->ImageService->saveImage($image, 'establishments');
+                $imagePath = $this->ImageService->saveImage($image, 'establishment-image');
                 $establishment->images()->create(['image' => $imagePath]);  
             }
         }
