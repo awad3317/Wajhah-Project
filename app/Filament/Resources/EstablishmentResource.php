@@ -79,28 +79,32 @@ class EstablishmentResource extends Resource
             ->alignCenter(),
         ])
         ->actions([
-            Tables\Actions\ActionGroup::make([
-                Tables\Actions\Action::make('changeVerification')
-                    ->label('تغيير الحالة')
-                    ->icon('heroicon-o-shield-check')
-                    ->form([
-                        Forms\Components\Select::make('verification_status')
-                            ->label('حالة التوثيق')
-                            ->options([
-                                '1' => 'موثق',
-                                '0' => 'غير موثق',
-                            ])
-                            ->required()
-                            ->default(fn (Establishment $record) => $record->is_verified)
-                    ])
-                    ->action(function (Establishment $record, array $data) {
-                        $record->update(['is_verified' => $data['verification_status']]);
-                        Notification::make()
-                            ->title('تم تحديث حالة التوثيق')
-                            ->success()
-                            ->send();
-                    }),
-            ]),
+            Tables\Actions\Action::make('changeVerification')
+                ->label('')
+                ->icon('heroicon-o-shield-check')
+                ->iconButton()
+                ->tooltip('تغيير حالة التوثيق')
+                ->form([
+                    Forms\Components\Select::make('verification_status')
+                        ->label('حالة التوثيق')
+                        ->options([
+                            '1' => 'موثق',
+                            '0' => 'غير موثق',
+                        ])
+                        ->required()
+                        ->default(fn (Establishment $record) => $record->is_verified)
+                ])
+                ->action(function (Establishment $record, array $data) {
+                    $record->update(['is_verified' => $data['verification_status']]);
+                    Notification::make()
+                        ->title('تم تحديث حالة التوثيق')
+                        ->success()
+                        ->send();
+                }),
+            
+            Tables\Actions\ViewAction::make()->iconButton(),
+            Tables\Actions\EditAction::make()->iconButton(),
+            Tables\Actions\DeleteAction::make()->iconButton(),
         ])
         ->filters([
             Tables\Filters\SelectFilter::make('type')
@@ -113,16 +117,12 @@ class EstablishmentResource extends Resource
                 ->label('الموثقين فقط')
                 ->query(fn (Builder $query): Builder => $query->where('is_verified', true)),
         ])
-        ->actions([
-            Tables\Actions\ViewAction::make()->iconButton(),
-            Tables\Actions\EditAction::make()->iconButton(),
-            Tables\Actions\DeleteAction::make()->iconButton(),
-        ])
         ->bulkActions([
             Tables\Actions\BulkActionGroup::make([
                 Tables\Actions\DeleteBulkAction::make(),
             ]),
-        ]) ->checkIfRecordIsSelectableUsing(fn () => false);
+        ])
+        ->checkIfRecordIsSelectableUsing(fn () => false);
 }
     public static function getRelations(): array
     {
