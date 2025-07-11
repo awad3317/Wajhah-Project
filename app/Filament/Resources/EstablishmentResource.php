@@ -113,8 +113,8 @@ class EstablishmentResource extends Resource
     {
         return [
             'index' => Pages\ListEstablishments::route('/'),
-            'create' => Pages\CreateEstablishment::route('/create'),
-            'edit' => Pages\EditEstablishment::route('/{record}/edit'),
+            // 'create' => Pages\CreateEstablishment::route('/create'),
+            // 'edit' => Pages\EditEstablishment::route('/{record}/edit'),
         ];
     }
 }
