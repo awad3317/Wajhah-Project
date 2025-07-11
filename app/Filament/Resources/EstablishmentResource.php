@@ -2,21 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EstablishmentResource\Pages;
-use App\Filament\Resources\EstablishmentResource\RelationManagers;
-use App\Models\Establishment;
-use Filament\Notifications\Notification;
-use Filament\Tables\Actions\ActionGroup;
 use Filament\Forms;
-use Filament\Support\Enums\FontWeight;
-use Filament\Tables\Columns\Layout\Stack;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Establishment;
+use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
+use Filament\Notifications\Notification;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\Layout\Stack;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EstablishmentResource\Pages;
+use App\Filament\Resources\EstablishmentResource\RelationManagers;
 
 class EstablishmentResource extends Resource
 {
@@ -80,10 +79,10 @@ class EstablishmentResource extends Resource
             ->alignCenter(),
         ])
         ->actions([
-            // إضافة Action لتغيير الحالة
-            ActionGroup::make([
+            Tables\Actions\ActionGroup::make([
                 Tables\Actions\Action::make('changeVerification')
-                    ->label('تغيير حالة التوثيق')
+                    ->label('تغيير الحالة')
+                    ->icon('heroicon-o-shield-check')
                     ->form([
                         Forms\Components\Select::make('verification_status')
                             ->label('حالة التوثيق')
@@ -97,7 +96,7 @@ class EstablishmentResource extends Resource
                     ->action(function (Establishment $record, array $data) {
                         $record->update(['is_verified' => $data['verification_status']]);
                         Notification::make()
-                            ->title('تم تحديث حالة التوثيق بنجاح')
+                            ->title('تم تحديث حالة التوثيق')
                             ->success()
                             ->send();
                     }),
