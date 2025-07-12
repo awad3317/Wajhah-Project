@@ -18,7 +18,7 @@ class EstablishmentRepository implements RepositoriesInterface
 
     public function index($request)
     {
-        $query = Establishment::select(['id', 'name', 'primary_image', 'region_id'])
+        $query = Establishment::select(['id', 'name', 'primary_image', 'region_id','type_id'])
             ->with([
                 'region' => function ($q) {
                     $q->select('id', 'name', 'parent_id');
