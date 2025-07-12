@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             EstablishmentTypeSeeder::class,
             establishmentSeeder::class,
             reviewSeeder::class,
+            price_package_iconsSeeder::class,
         ]);
     }
 }
