@@ -13,7 +13,7 @@ class PricePackage extends Model
         'establishment_id',
         'name',
         'description',
-        'icon',
+        'icon_id',
         'price',
         'features',
         'is_active',
@@ -23,6 +23,11 @@ class PricePackage extends Model
         'features' => 'array',
         'is_active' => 'boolean',
     ];
+
+    public function icon()
+    {
+        return $this->belongsTo(pricePackageIcon::class);
+    }
 
     /**
      * Get the establishment that owns the price package.

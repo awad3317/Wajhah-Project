@@ -15,12 +15,13 @@ use App\Http\Controllers\API\PricePackageController;
 use App\Http\Controllers\API\AdvertisementController;
 use App\Http\Controllers\API\Auth\UserAuthController;
 use App\Http\Controllers\API\EstablishmentController;
+use App\Http\Controllers\API\pricePackageIconController;
 use App\Http\Controllers\API\EstablishmentRuleController;
 use App\Http\Controllers\API\EstablishmentTypeController;
 use App\Http\Controllers\API\Auth\ForgetPasswordController;
 use App\Http\Controllers\API\EstablishmentFeatureController;
-use App\Http\Controllers\API\EstablishmentUnavailabilityController;
 use App\Http\Controllers\API\EstablishmentSpecificationController;
+use App\Http\Controllers\API\EstablishmentUnavailabilityController;
 
 
 Route::get('/user', function (Request $request) {
@@ -39,6 +40,8 @@ Route::middleware(['auth:sanctum','check.banned'])->group(function () {
     // Route::apiResource('/review', ReviewController::class)->except(['index','show']);
     Route::apiResource('/unavailabilityDays', EstablishmentUnavailabilityController::class)->except(['index','show','update']);
     Route::apiResource('/booking', BookingController::class)->except([]);
+    Route::apiResource('/pricePackageIcon', pricePackageIconController::class)->only(['index']);
+    
     Route::get('/notifications',[NotificationController::class,'index']);
     
     
