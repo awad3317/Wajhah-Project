@@ -34,9 +34,9 @@ class PricePackageController extends Controller
     {
         $fields=$request->validate([
             'establishment_id' => ['required',Rule::exists('establishments','id')],
+            'icon_id' => ['nullable',Rule::exists('price_package_icons','id')],
             'name' => ['required','string','max:100'],
             'description' => ['nullable','string','max:1000'],
-            'icon'=>['required','string','max:255'],
             'price' =>['required','numeric','min:0'],
             'features' => ['nullable', 'array'],
             'features.*' => ['required', 'string', 'max:100'],
