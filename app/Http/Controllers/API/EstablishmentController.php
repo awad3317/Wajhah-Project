@@ -57,7 +57,7 @@ class EstablishmentController extends Controller
         'price_packages' => ['required', 'array', 'min:1'],
         'price_packages.*.name' => ['required', 'string', 'max:100'],
         'price_packages.*.description' => ['nullable', 'string', 'max:1000'],
-        'price_packages.*.icon' => ['required', 'string', 'max:255'],
+        'price_packages.*.icon' => ['nullable', 'string', 'max:255'],
         'price_packages.*.price' => ['required', 'numeric', 'min:0'],
         'price_packages.*.features' => ['nullable', 'array'],
         'price_packages.*.features.*' => ['required', 'string', 'max:100'],
