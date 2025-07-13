@@ -37,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             'success' => Color::Green,
             'warning' => Color::Amber,
             ])
-            // ->spa() 
+            ->spa() 
             ->brandName('وجهة')
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('18rem')
