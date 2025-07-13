@@ -17,8 +17,8 @@ class FavoriteRepository implements RepositoriesInterface
 
     public function index($userId)
     {
-        return Favorite::with(['establishment:id,name,region_id,primary_image,is_verified','establishment.region:id,name,parent_id' ,'establishment.region.parent:id,name' ])
-        ->where('user_id','=',$userId)->where('is_verified','=',true)->paginate(10);
+        return Favorite::with(['establishment:id,name,region_id,primary_image','establishment.region:id,name,parent_id' ,'establishment.region.parent:id,name' ])
+        ->where('user_id','=',$userId)->paginate(10);
     }
 
     /**
