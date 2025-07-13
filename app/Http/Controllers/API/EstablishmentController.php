@@ -99,7 +99,11 @@ class EstablishmentController extends Controller
                     'description' => $package['description'] ?? null,
                     'icon_id' => $package['icon_id'] ?? null,
                     'price' => $package['price'],
-                    'features' => !empty($package['features']) ? json_encode($package['features']) : null,
+                    'features' => !empty($package['features']) 
+    ? (is_array($package['features']) 
+        ? json_encode($package['features'], JSON_UNESCAPED_UNICODE) 
+        : $package['features']) 
+    : null,
                 ]);
             }
         }
