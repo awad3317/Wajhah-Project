@@ -26,7 +26,7 @@ class Dashboardcontroller extends Controller
         DB::raw('COUNT(DISTINCT establishments.id) as establishments_count'),
         DB::raw('AVG(reviews.rating) as average_rating'),
         DB::raw('COUNT(reviews.id) as total_reviews'))->first();
-        $myEstablishments = Establishment::where('owner_id', $ownerId)->with(['type', 'region:parent'])->get();
+        $myEstablishments = Establishment::where('owner_id', $ownerId)->with(['type', 'region'])->get();
         return ApiResponseClass::sendResponse([
             'my_stablishments_count' => $stats->establishments_count,
             'average_rating' => $stats->average_rating,
