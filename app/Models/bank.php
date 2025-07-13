@@ -19,6 +19,14 @@ class bank extends Model
         'icon',
     ];
 
+    public function getIconAttribute($value)
+    {
+        if (request()->is('api/*')) {
+            return 'storage/'.$value;
+        }
+        return $value;
+    }
+
     /**
      * Get the owner accounts for this bank.
      */

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             establishmentSeeder::class,
             reviewSeeder::class,
             price_package_iconsSeeder::class,
+            bankSeeder::class,
         ]);
     }
 }
