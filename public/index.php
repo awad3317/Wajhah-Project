@@ -13,7 +13,7 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 // Register the Composer autoloader...
 require __DIR__.'/../vendor/autoload.php';
 
-ini_set('memory_limit', '1024M');
+ini_set('memory_limit', '-1');
 
 // Bootstrap Laravel and handle the request...
 /** @var Application $app */
