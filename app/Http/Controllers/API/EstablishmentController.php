@@ -111,12 +111,14 @@ class EstablishmentController extends Controller
                 ]);
             }
         }
-        $establishment->load(['images', 'features', 'rules','specifications', 'type', 'region', 'owner']);
+        $establishment->load(['images', 'features', 'rules','specifications', 'type', 'region', 'owner','pricePackages']);
         return ApiResponseClass::sendResponse([
             'establishment' => $establishment,
             'images' => $establishment->images,
             'features' => $establishment->features,
-            'rules' => $establishment->rules]
+            'rules' => $establishment->rules,
+            'specifications' => $establishment->specifications,
+            'PricePackages' => $establishment->pricePackages,]
             ,'establishment saved successfully.');
     } catch (Exception $e) {
         return ApiResponseClass::sendError('Error save establishment: ' . $e->getMessage());
